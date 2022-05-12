@@ -1,0 +1,78 @@
+{% extends "home/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+
+
+	{% block content%}
+
+
+
+		<div class="container">
+			<div class="row" id="grid-row">
+				<div class="col" id="specimen-grid">
+
+					<div id="row-alpha">
+
+						<div>
+							<h6>A</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>B</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>C</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>D</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>E</h6>
+						</div>
+
+
+					</div>
+					
+					<div id="row-one">
+						<h6 id="number-one">1</h6>
+						<div class="box blank" id="a1"><p class="tubetype"></p></div>
+						<div class="box blank" id="b1"><p class="tubetype"></p></div>
+						<div class="box blank" id="c1"><p class="tubetype"></p></div>
+						<div class="box blank" id="d1"><p class="tubetype"></p></div>
+						<div class="box blank" id="e1"><p class="tubetype"></p></div>
+					</div>
+
+					<div id="row-two">
+						<h6 id="number-two">2</h6>
+						<div class="box blank" id="b2"><p class="tubetype"></p></div>
+						<div class="box blank"><p class="tubetype"></p></div>
+						<div class="box blank"><p class="tubetype"></p></div>
+						<div class="box blank"><p class="tubetype"></p></div>
+						<div class="box blank"><p class="tubetype"></p></div>
+					</div>	
+
+				</div>
+				<div class="col"></div>
+				<div class="col">
+					
+					<form method="POST" id="accession-form">
+						{% csrf_token %}
+
+					    <label for="accession-number" class="form-label">Enter Accession Number Followed By Tubetype</label>
+					    <input type="search" class="form-control" id="accession-number">
+					    <button class="btn btn-primary" type="submit">Submit</button>
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+
+
+
+	{% endblock content %}
