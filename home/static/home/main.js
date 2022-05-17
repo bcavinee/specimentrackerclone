@@ -18,10 +18,10 @@ var arrayCounter= 0
 var firstElement
 var secondElement
 var nextElement
-
+var accessionSelected
 
 $(document).ready(function(){
-  $(".box.blank").click(function(){
+  $(".box").click(function(){
 
 
 
@@ -74,6 +74,7 @@ $(document).ready(function(){
       }    
 
 
+
     }
 
     catch(err) {
@@ -100,6 +101,8 @@ $(document).on('submit',"#accession-form", function(e) {
       url: '',
       type: 'POST',
       data: {
+
+        positionId : position.attr("id"),
         accessionNumber : $('#accession-number').val(),
         csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
         
@@ -110,56 +113,74 @@ $(document).on('submit',"#accession-form", function(e) {
       success: function(response) {
 
      
+
+      
+
+      if (response.accession_number.length == 6){
+
+        accessionSelected= true
+      }
+
+     
+
+      if (response.accession_number.length == 2 && accessionSelected == true){
+
+
+        if (response.accession_number == "31") {
+
+          position.attr('class','box edta-large')
+          position.text("31")
+          position.next().addClass("pulse")
+          firstElement= position
+          secondElement= position.next()
+
+        }
+
+
+        else if (response.accession_number == "21") {
+
+          position.attr('class','box serum-large')
+          position.text("21")
+          position.next().addClass("pulse")
+          firstElement= position
+          secondElement= position.next()        
+
+
+        }
+
+        else if (response.accession_number == "16") {
+
+          position.attr('class','box pst-large')
+          position.text("16")
+          position.next().addClass("pulse")
+          firstElement= position
+          secondElement= position.next()        
+
+
+        }
+
         
-      if (response.accession_number == "31") {
 
-        position.attr('class','box edta-large')
-        position.text("31")
-        position.next().addClass("pulse")
-        firstElement= position
-        secondElement= position.next()
+        // position= position.next()
 
-      }
+        if (position.attr("id") == "e1") {
+          
+          position= $("#a2")
+          position.addClass("pulse")
+          
+        }
 
+        else (position=position.next())
 
-      else if (response.accession_number == "21") {
+        accessionSelected= false
 
-        position.attr('class','box serum-large')
-        position.text("21")
-        position.next().addClass("pulse")
-        firstElement= position
-        secondElement= position.next()        
+      }  
 
+      
+      $("#patient-name").text(response.patient_name_from_model)
+      $("#accession-number").val("")
+      
 
-      }
-
-      else if (response.accession_number == "16") {
-
-        position.attr('class','box pst-large')
-        position.text("16")
-        position.next().addClass("pulse")
-        firstElement= position
-        secondElement= position.next()        
-
-
-      }
-
-    
-
-      // position= position.next()
-
-      if (position.attr("id") == "e1") {
-        
-        position= $("#b2")
-        position.addClass("pulse")
-        
-      }
-
-      else (position=position.next())
-
-
-
-      $("#accession-number").val("")  
 
       }     
 

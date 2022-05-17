@@ -1,0 +1,158 @@
+{% extends "home/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+
+
+	{% block content%}
+
+
+
+		<div class="container">
+			<div class="row" id="grid-row">
+				<div class="col" id="specimen-grid">
+
+					<div id="row-alpha">
+
+						<div>
+							<h6>A</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>B</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>C</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>D</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>E</h6>
+						</div>
+
+
+					</div>
+
+					
+					<div id="row-one">
+						<h6 id="number-one">1</h6>
+						{% for object in hematology_first_rack_one_objects %}
+									
+							{% if object.position == "a1" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+									
+							{% elif object.position == "b1" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "c1" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "d1" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "e1" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+													
+
+							{% endif %}
+
+						{% endfor %}
+
+					</div>
+
+
+
+					<div id="row-two">
+						<h6 id="number-two">2</h6>
+
+
+						{% for object in hematology_first_rack_one_objects %}
+									
+							{% if object.position == "a2" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+									
+							{% elif object.position == "b2" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "c2" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "d2" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "e2" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+													
+
+							{% endif %}
+
+						{% endfor %}
+
+					</div>	
+
+
+
+
+				</div>
+				<div class="col"></div>
+				<div class="col">
+					
+					<form method="POST" id="accession-form">
+						{% csrf_token %}
+
+					    <label for="accession-number" class="form-label">Enter Accession Number Followed By Tubetype</label>
+					    <input type="search" class="form-control" id="accession-number">
+					    <button class="btn btn-primary" type="submit">Submit</button>
+					</form>
+
+					<div class="card mt-5">
+					  <div class="card-header">
+					    Patient Information
+					  </div>
+					  <div class="card-body">
+						<table class="table">
+						  
+						  <tbody>
+						    <tr>
+						      
+						      <td scope="col">Medical Record Number</td>
+						      <td scope="col"></td>
+						      <td scope="col" id="medical-record-number"></td>
+						    </tr>						  	
+						    <tr>
+						      
+						      <td>Accession Number</td>
+						      <td></td>
+						      <td id='table-accession-number'></td>
+						    </tr>
+						    <tr>
+						      
+						      <td>Patient Name</td>
+						      <td></td>
+						      <td id="patient-name"></td>
+						    </tr>
+
+						  </tbody>
+						</table>
+					  </div>
+					</div>	
+
+				</div>
+			</div>
+		</div>
+
+
+
+
+	{% endblock content %}

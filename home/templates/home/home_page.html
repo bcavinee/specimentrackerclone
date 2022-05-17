@@ -10,6 +10,49 @@
 
 
 		<div class="container">
+			<div class="row">
+				<div class="col"></div>
+				<div class="col">
+					
+				
+
+
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-secondary mt-5" data-bs-toggle="modal" data-bs-target="#rackselectionModal">
+					  Check In
+					</button>
+
+					<!-- Modal -->
+					<div class="modal fade" id="rackselectionModal" tabindex="-1" aria-labelledby="rackselectionLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="rackselectionLabel">Chose Location</h5>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+					      <div class="modal-body">
+					      	<form method="POST">
+					      		{% csrf_token %}
+					      		{{ rack_selection_form|crispy }}
+					      		<button class="btn btn-primary" type="submit" id="rack-choice-submit-button" name="user-rack-choice">Go</button>
+					      		
+				      		</form>
+					      </div>
+
+					    </div>
+					  </div>
+					</div>
+
+
+				</div>
+				<div class="col"></div>
+
+			</div>
+		</div>
+
+
+<!-- 
+		<div class="container">
 			<div class="row" id="grid-row">
 				<div class="col" id="specimen-grid">
 
@@ -49,11 +92,11 @@
 
 					<div id="row-two">
 						<h6 id="number-two">2</h6>
+						<div class="box blank" id="a2"><p class="tubetype"></p></div>
 						<div class="box blank" id="b2"><p class="tubetype"></p></div>
-						<div class="box blank"><p class="tubetype"></p></div>
-						<div class="box blank"><p class="tubetype"></p></div>
-						<div class="box blank"><p class="tubetype"></p></div>
-						<div class="box blank"><p class="tubetype"></p></div>
+						<div class="box blank" id="c2"><p class="tubetype"></p></div>
+						<div class="box blank" id="d2"><p class="tubetype"></p></div>
+						<div class="box blank" id="e2"><p class="tubetype"></p></div>
 					</div>	
 
 				</div>
@@ -68,9 +111,41 @@
 					    <button class="btn btn-primary" type="submit">Submit</button>
 					</form>
 
+					<div class="card mt-5">
+					  <div class="card-header">
+					    Patient Information
+					  </div>
+					  <div class="card-body">
+						<table class="table">
+						  
+						  <tbody>
+						    <tr>
+						      
+						      <td scope="col">Medical Record Number</td>
+						      <td scope="col"></td>
+						      <td scope="col" id="medical-record-number"></td>
+						    </tr>						  	
+						    <tr>
+						      
+						      <td>Accession Number</td>
+						      <td></td>
+						      <td id='table-accession-number'></td>
+						    </tr>
+						    <tr>
+						      
+						      <td>Patient Name</td>
+						      <td></td>
+						      <td id="patient-name"></td>
+						    </tr>
+
+						  </tbody>
+						</table>
+					  </div>
+					</div>					
+
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 
 
