@@ -31,7 +31,7 @@ class hematology_first_rack_one(models.Model):
 
 	# def save(self, *args, **kwargs):
 		
-	# 	if self.accession_number_link == "":
+	# 	if self.accession_numbers == "":
 	# 		self.css_of_position= "box blank"
 	# 	super(hematology_first_rack_one,self).save(*args,**kwargs)
 	
@@ -49,6 +49,8 @@ class accession_numbers(models.Model):
 	patient_link= models.ForeignKey(patient_information, on_delete=models.CASCADE)
 	accession_number= models.CharField(max_length=200, blank=True)
 	rack_link= models.OneToOneField(hematology_first_rack_one, on_delete=models.CASCADE, null=True, blank=True)
+
+
 
 	class Meta:
 		verbose_name= "Accession Number"

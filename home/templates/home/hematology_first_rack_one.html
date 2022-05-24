@@ -7,11 +7,26 @@
 
 	{% block content%}
 
+		<div class="row">
+
+			<div class="col d-flex justify-content-end">
+				
+				<div class="card text-dark text-center bg-warning mt-3" id="flash-message" style="max-width: 12rem; height: 140px;">
+				  <div class="card-body">
+				    
+				    <p class="card-text">Must enter valid<br>accession number first</p>
+				  </div>
+				</div>			
+
+			</div>
+			
+		</div>
 
 
+				
 		<div class="container">
 			<div class="row" id="grid-row">
-				<div class="col" id="specimen-grid">
+				<div class="col-4" id="specimen-grid">
 
 					<div id="row-alpha">
 
@@ -19,7 +34,7 @@
 							<h6>A</h6>
 						</div>
 
-						<div class="alpha-top-grid">
+						<div class="alpha-top-grid" id="user{{user_selected_accession}}">
 							<h6>B</h6>
 						</div>
 
@@ -59,7 +74,7 @@
 
 									
 							{% elif object.position == "e1" %}
-									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 													
 
 							{% endif %}
@@ -105,15 +120,17 @@
 
 
 				</div>
-				<div class="col"></div>
-				<div class="col">
+				<div class="col-3"></div>
+				<div class="col-4">
 					
 					<form method="POST" id="accession-form">
 						{% csrf_token %}
 
 					    <label for="accession-number" class="form-label">Enter Accession Number Followed By Tubetype</label>
+					    
 					    <input type="search" class="form-control" id="accession-number">
-					    <button class="btn btn-primary" type="submit">Submit</button>
+
+					    <!-- <button class="btn btn-primary" type="submit">Submit</button> -->
 					</form>
 
 					<div class="card mt-5">
@@ -146,9 +163,48 @@
 						  </tbody>
 						</table>
 					  </div>
-					</div>	
+					</div>
+
+
+
+
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-primary mt-3" id="delete-button" data-bs-toggle="modal" data-bs-target="#removeAllModal">
+					  Remove All
+					</button>
+
+					<form method="POST">
+						
+						{% csrf_token %}
+						{{remove_patient_form|crispy}}
+						
+						<button class="btn btn-primary" type="submit">Submit</button>
+
+					</form>
+
+					<!-- Modal -->
+					<div class="modal fade" id="removeAllModal" tabindex="-1" aria-labelledby="removeAllModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+					      <div class="modal-body" id="remove-all-body">
+
+					      </div>
+					    </div>
+					  </div>
+					</div>
+				
 
 				</div>
+
+				<div class="col">
+					 
+					<p id="flash-accession"><span class="ms-3 mt-2" id="accession-flash-span"></span></p>
+				</div>
+
 			</div>
 		</div>
 

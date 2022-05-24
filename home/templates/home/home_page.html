@@ -11,7 +11,17 @@
 
 		<div class="container">
 			<div class="row">
-				<div class="col"></div>
+				<div class="col">
+					
+			      	<form method="POST">
+			      		{% csrf_token %}
+			      		{{ search_accession_form|crispy }}
+			      		<button class="btn btn-primary" type="submit" id="search-accession-submit-button" name="user-search-accession">Go</button>
+			      		
+		      		</form>
+
+
+				</div>
 				<div class="col">
 					
 				
