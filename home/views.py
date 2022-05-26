@@ -44,9 +44,13 @@ def home_page(request):
 				
 				patient_accession= accession_numbers.objects.get(accession_number=accession_search_results)
 
-				patient_name= patient_accession.patient_link.patient_name
+				# patient_name= patient_accession.patient_link.patient_name
 
-				accession_rack_position= patient_accession.rack_link.position
+				# accession_rack_position= patient_accession.rack_link.position
+
+				accession_rack= hematology_first_rack_one.objects.filter(accession_link= patient_accession).first()
+
+				accession_rack_position= accession_rack.position
 
 				accession_search= True
 
@@ -68,8 +72,11 @@ def hematology_first_rack_one_view(request):
 	accession_rack_position= request.session['accession_rack_position']
 	accession_search= request.session['accession_search']
 	 
+	# y= accession_numbers.objects.get(accession_number="W11111")
+	# x= hematology_first_rack_one.objects.filter(accession_link=y)
+	# print(y.patient_link.medical_record_number)
 
-
+	
 	if request.method == "GET":
 
 		if request.is_ajax():
@@ -94,6 +101,14 @@ def hematology_first_rack_one_view(request):
 
 			remove_patient_form= remove_patient(request.POST)
 
+
+			# from_search= True
+
+			# if request.POST['patient_rack_location'] == "" and (from_search == True and accession_search == True):
+
+			# 	print('')
+
+
 			if remove_patient_form.is_valid():
 
 				location_to_remove= remove_patient_form.cleaned_data['patient_rack_location']
@@ -106,15 +121,22 @@ def hematology_first_rack_one_view(request):
 				single_location_removal.save()
 
 
-			if accession_numbers.objects.filter(rack_link=single_location_removal).exists():
+			position_with_accession= hematology_first_rack_one.objects.get(position=location_to_remove)
 
-				rack_position_accession_link= accession_numbers.objects.get(rack_link=single_location_removal)
+
+			# if accession_numbers.objects.filter(rack_link=single_location_removal).exists():
+
+			# 	rack_position_accession_link= accession_numbers.objects.get(rack_link=single_location_removal)
 				
-				rack_position_accession_link.rack_link= None
+			# 	rack_position_accession_link.rack_link= None
 
-				rack_position_accession_link.save()
+			# 	rack_position_accession_link.save()
 
+			if position_with_accession.accession_link != None:
 
+				position_with_accession.accession_link = None
+
+				position_with_accession.save()
 
 
 		if 'delete_equation_answer' in request.POST:
@@ -131,9 +153,9 @@ def hematology_first_rack_one_view(request):
 
 					rack_position.save()
 
-				for accession in accession_numbers.objects.all():
+				for accession in hematology_first_rack_one.objects.all():
 
-					accession.rack_link= None
+					accession.accession_link= None
 
 					accession.save()
 
@@ -150,11 +172,19 @@ def hematology_first_rack_one_view(request):
 
 			if len(accession_number) == 6:
 
-				link_rack= accession_numbers.objects.get(accession_number=accession_number)
+				# link_rack= accession_numbers.objects.get(accession_number=accession_number)
 
-				link_rack.rack_link= hematology_first_rack_one.objects.get(position=position)
+				# link_rack.rack_link= hematology_first_rack_one.objects.get(position=position)
 
-				link_rack.save()
+				# link_rack.save()
+
+				accession_num= accession_numbers.objects.get(accession_number=accession_number)
+
+				rack= hematology_first_rack_one.objects.get(position=position)
+
+				rack.accession_link= accession_num
+
+				rack.save()
 
 
 			elif len(accession_number) == 2:
