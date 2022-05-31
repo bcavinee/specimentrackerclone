@@ -96,23 +96,75 @@ def hematology_first_rack_one_view(request):
 
 	if request.method == "POST":
 
+		# try:
+		# 	if 'patient_rack_location' in request.POST:
 
-		if 'patient_rack_location' in request.POST:
-
-			remove_patient_form= remove_patient(request.POST)
-
-
-			# from_search= True
-
-			# if request.POST['patient_rack_location'] == "" and (from_search == True and accession_search == True):
-
-			# 	print('')
+		# 		remove_patient_form= remove_patient(request.POST)
 
 
-			if remove_patient_form.is_valid():
+		# 		from_search= True
 
-				location_to_remove= remove_patient_form.cleaned_data['patient_rack_location']
+		# 		if request.POST['patient_rack_location'] == "" and (from_search == True and accession_search == True):
 
+
+					
+		# 			remove_location= hematology_first_rack_one.objects.get(position=accession_rack_position)
+
+		# 			remove_location.css_of_position= "box blank"
+		# 			remove_location.tube_type= ""
+
+		# 			remove_location.accession_link = None
+
+
+
+		# 			remove_location.save()
+
+		# 			from_search= False
+					
+
+		# 		if remove_patient_form.is_valid():
+
+		# 			location_to_remove= remove_patient_form.cleaned_data['patient_rack_location']
+
+		# 			single_location_removal= hematology_first_rack_one.objects.get(position=location_to_remove)
+
+		# 			single_location_removal.css_of_position= "box blank"
+		# 			single_location_removal.tube_type= ""
+
+		# 			single_location_removal.save()
+
+
+		# 		position_with_accession= hematology_first_rack_one.objects.get(position=location_to_remove)
+
+
+		# 		# if accession_numbers.objects.filter(rack_link=single_location_removal).exists():
+
+		# 		# 	rack_position_accession_link= accession_numbers.objects.get(rack_link=single_location_removal)
+					
+		# 		# 	rack_position_accession_link.rack_link= None
+
+		# 		# 	rack_position_accession_link.save()
+
+		# 		if position_with_accession.accession_link != None:
+
+		# 			position_with_accession.accession_link = None
+
+		# 			position_with_accession.save()
+
+
+		# except UnboundLocalError:
+		# 	print("welp")	
+
+
+
+		if 'removeSinglePatientHidden' in request.POST:
+
+			location_to_remove= request.POST.get("removeSinglePatientHidden")
+
+
+			try:
+
+			
 				single_location_removal= hematology_first_rack_one.objects.get(position=location_to_remove)
 
 				single_location_removal.css_of_position= "box blank"
@@ -120,23 +172,42 @@ def hematology_first_rack_one_view(request):
 
 				single_location_removal.save()
 
+				position_with_accession= hematology_first_rack_one.objects.get(position=location_to_remove)
 
-			position_with_accession= hematology_first_rack_one.objects.get(position=location_to_remove)
+				if position_with_accession.accession_link != None:
+
+					position_with_accession.accession_link = None
+
+					position_with_accession.save()
 
 
-			# if accession_numbers.objects.filter(rack_link=single_location_removal).exists():
-
-			# 	rack_position_accession_link= accession_numbers.objects.get(rack_link=single_location_removal)
+			except hematology_first_rack_one.DoesNotExist:
 				
-			# 	rack_position_accession_link.rack_link= None
+				print('eh')
 
-			# 	rack_position_accession_link.save()
+			if request.is_ajax():
 
-			if position_with_accession.accession_link != None:
+				
+				if location_to_remove == "":
 
-				position_with_accession.accession_link = None
+					location_to_remove= "empty"
 
-				position_with_accession.save()
+					remove_location= hematology_first_rack_one.objects.get(position=accession_rack_position)
+
+					remove_location.css_of_position= "box blank"
+					remove_location.tube_type= ""
+
+					remove_location.accession_link = None
+
+					remove_location.save()
+
+			
+
+				return JsonResponse({"accession_rack_position" : accession_rack_position,'location_to_remove' : location_to_remove}, status=200)
+
+
+
+
 
 
 		if 'delete_equation_answer' in request.POST:
@@ -164,7 +235,10 @@ def hematology_first_rack_one_view(request):
 
 			accession_number= request.POST['accessionNumber']
 			position= request.POST['positionId']
+			lock_switch= request.POST['lock_switch']
+			locked_tubetype= request.POST['locked_tubetype']
 
+			
 			
 			
 			get_position= hematology_first_rack_one.objects.get(position=position)
@@ -247,6 +321,15 @@ def hematology_first_rack_one_view(request):
 	elif accession_search == False:
 
 		user_selected_accession= None
+
+
+	from_search= hematology_first_rack_one.objects.get(position=accession_rack_position)
+
+	if from_search.css_of_position == "box blank":
+
+		user_selected_accession= None
+
+
 
 	return render(request,'home/hematology_first_rack_one.html', {'hematology_first_rack_one_objects' : hematology_first_rack_one_objects, 
 		"user_selected_accession" : user_selected_accession, "remove_patient_form" : remove_patient_form})

@@ -50,11 +50,12 @@ class hematology_first_rack_one(models.Model):
 	accession_link= models.ForeignKey(accession_numbers, on_delete=models.CASCADE, null=True, blank=True)
 	
 
-	# def save(self, *args, **kwargs):
+	def save(self, *args, **kwargs):
 		
-	# 	if self.accession_numbers == "":
-	# 		self.css_of_position= "box blank"
-	# 	super(hematology_first_rack_one,self).save(*args,**kwargs)
+		if self.accession_link == None:
+			self.css_of_position= "box blank"
+			self.tube_type= ""
+		super(hematology_first_rack_one,self).save(*args,**kwargs)
 	
 	class Meta:
 		verbose_name= "Hematology First Rack One"

@@ -8,7 +8,7 @@
 	{% block content%}
 
 		<div class="row">
-
+			<a class="nav-link active me-5" href="{% url 'home_page' %}">Login</a>
 			<div class="col d-flex justify-content-end">
 				
 				<div class="card text-dark text-center bg-warning mt-3" id="flash-message" style="max-width: 12rem; height: 140px;">
@@ -132,6 +132,8 @@
 
 					    <!-- <button class="btn btn-primary" type="submit">Submit</button> -->
 					</form>
+					<button type="button" class="btn btn-success mt-3" id="lock">Lock</button>
+					<h3 id="lock-error"></h3>
 
 					<div class="card mt-5">
 					  <div class="card-header">
@@ -173,12 +175,12 @@
 					  Remove All
 					</button>
 
-					<form method="POST">
+					<form method="POST" id="remove-single-patient">
 						
 						{% csrf_token %}
-						{{remove_patient_form|crispy}}
+						<input type="hidden" id="remove-single-patient-hidden" name="remove-single" value="">
 						
-						<button class="btn btn-primary" type="submit">Submit</button>
+						<button class="btn btn-primary" type="submit" id="single-remove-button">Submit</button>
 
 					</form>
 
