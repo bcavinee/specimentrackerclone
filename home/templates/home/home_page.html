@@ -9,7 +9,7 @@
 
 
 
-		<div class="container">
+<!-- 		<div class="container">
 			<div class="row">
 				<div class="col">
 					
@@ -23,17 +23,17 @@
 
 				</div>
 				<div class="col">
-					
-				
+					 -->
+
 
 
 					<!-- Button trigger modal -->
-					<button type="button" class="btn btn-secondary mt-5" data-bs-toggle="modal" data-bs-target="#rackselectionModal">
+<!-- 					<button type="button" class="btn btn-secondary mt-5" data-bs-toggle="modal" data-bs-target="#rackselectionModal">
 					  Check In
-					</button>
+					</button> -->
 
 					<!-- Modal -->
-					<div class="modal fade" id="rackselectionModal" tabindex="-1" aria-labelledby="rackselectionLabel" aria-hidden="true">
+<!-- 					<div class="modal fade" id="rackselectionModal" tabindex="-1" aria-labelledby="rackselectionLabel" aria-hidden="true">
 					  <div class="modal-dialog">
 					    <div class="modal-content">
 					      <div class="modal-header">
@@ -42,8 +42,12 @@
 					      </div>
 					      <div class="modal-body">
 					      	<form method="POST">
-					      		{% csrf_token %}
-					      		{{ rack_selection_form|crispy }}
+		
+								<div class="input-group mb-3">
+									{% csrf_token %}
+									{{ rack_selection_form.accession_search}}
+								</div>
+
 					      		<button class="btn btn-primary" type="submit" id="rack-choice-submit-button" name="user-rack-choice">Go</button>
 					      		
 				      		</form>
@@ -59,7 +63,7 @@
 
 			</div>
 		</div>
-
+ -->
 
 <!-- 
 		<div class="container">
@@ -157,6 +161,76 @@
 			</div>
 		</div> -->
 
+
+
+
+	<div class="container">
+		<div class="row">
+			
+			<div class="col">
+				<button type="button" class="btn btn-primary rounded-1 mt-4" id="batch"><i class="bi bi-pencil-square me-2" id="pencil"></i>CREATE A NEW BATCH</button>
+
+				<button type="button" class="btn btn-primary rounded-1 mt-4" id="batch_two"><i class="bi bi-check-circle me-2" id="checkmark"></i>SPECIMEN CHECK-IN</button>
+
+				<button type="button" class="btn btn-primary rounded-1 mt-4" id="batch_three"><i class="bi bi-archive me-2" id="archive"></i><a href="{% url 'hematology_first_rack_one' %}" id="storage-manager">STORAGE MANAGER</a></button>
+
+			</div>
+		
+		</div>
+
+		<div class="row">
+			
+			<div class="col mt-4" id="car-col">
+				
+					
+				<img src="media/images/drive.png" id="car">
+				<p class="mt-4 "id="outstanding">0 Outstanding Batches for Core Lab</p>
+
+	
+			</div>
+			<div class="col mt-4" id="car-col-two"></div>
+			<div class="col mt-4" id="car-col-three">
+			
+				<p class="d-flex justify-content-end mt-3"><small>Last Checked at 19:20</small></p>
+			
+			</div>
+
+		</div>
+
+		<div class="row">
+			
+			<div class="col" id="table-col">
+				
+				<table class="table">
+				  <thead>
+				    <tr>
+				      
+				      <th scope="col">STATUS</th>
+				      <th scope="col">NUMBER</th>
+				      <th scope="col">ORIGIN</th>
+				      <th scope="col">DESTINATION</th>
+				      <th scope="col">SENT AT</th>
+				      <th scope="col">SPECIMENS</th>
+				      <th scope="col">TEMPERATURE</th>
+
+				    </tr>
+				  </thead>
+				  <tbody>
+
+				    				    				    
+				  </tbody>
+				</table>
+
+				<div class="col mb-4" id="inside-table">
+					
+				</div>
+
+			</div>
+		</div>
+
+		<p class="centered">No Rows To Show</p>
+
+	</div>	
 
 
 

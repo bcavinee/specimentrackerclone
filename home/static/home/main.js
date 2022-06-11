@@ -25,7 +25,7 @@ var fromUserRemovePulse= 0
 var singleCheckoutHidden
 var fromHomePage
 
-var lock_switch 
+var lock_switch= false
 var lock_counter= 0
 
 var tubeTypeLockCounter= 0
@@ -156,12 +156,21 @@ $(document).on('submit',"#accession-form", function(e) {
       }
 
 
-      if (tubeTypeLock == false && getTubetype.length == 2) {
+      // if (tubeTypeLock == false && getTubetype.length == 2) {
 
-        alert("Lock feature is on")
-        return false
+      //   alert("Lock feature is on")
 
-      }
+      //   tubeTypeLockCounter= 0
+      //   tubeTypeLock= true
+      //   locked_tubetype= null
+
+      //   lock_switch= false
+      //   lock_counter= 0
+      //   $("#lock").text("False")
+
+      //   return false
+
+      // }
 
 
     
@@ -267,6 +276,16 @@ $(document).on('submit',"#accession-form", function(e) {
       $("#flash-accession").css("visibility", "hidden")
       $("#lock-error").text("Whoaaa Buddy you're already locked")
 
+      tubeTypeLockCounter= 0
+      tubeTypeLock= true
+      locked_tubetype= null
+
+      lock_switch= false
+      lock_counter= 0
+      $("#lock").text("False")
+
+      return false      
+
 
     }      
 
@@ -283,8 +302,16 @@ $(document).on('submit',"#accession-form", function(e) {
       
       $("#medical-record-number").text(response.patient_mrn)
       $("#accession-number").val("")
-      tubeTypeLockCounter ++
-      tubeTypeLock= false
+     
+
+
+      // if (response.accession_number.length == 2) {
+
+      //   tubeTypeLockCounter ++
+      //   tubeTypeLock= false        
+
+      // }
+
 
 
       }     
@@ -297,6 +324,7 @@ $(document).on('submit',"#accession-form", function(e) {
 
     else if(lock_switch == false){
 
+      
 
     $.ajax({
 
@@ -605,7 +633,7 @@ $(document).ready(function(){
 
       lock_counter++
 
-      $(this).text("True")  
+      $("#lock-img").attr("src","media/images/locked.png")
 
     }
   
@@ -614,9 +642,14 @@ $(document).ready(function(){
     else if (lock_counter == 1) {
 
       
+      tubeTypeLockCounter= 0
+      tubeTypeLock= true
+      locked_tubetype= null
+
       lock_switch= false
       lock_counter= 0
-      $(this).text("False")
+      $("#lock-img").attr("src", "media/images/unlocked.png")
+      
     }
 
     
@@ -626,3 +659,14 @@ $(document).ready(function(){
   });
 
 });
+
+
+
+// $(document).ready(function(){
+
+//   $("#search-icon").click(function(){
+
+    
+    
+//   });
+// });

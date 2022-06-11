@@ -1,4 +1,6 @@
 from django import forms
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 
 
 rack_choices= [
@@ -19,8 +21,20 @@ class rack_options(forms.Form):
 
 class search_accession(forms.Form):
 
-	accession_search= forms.CharField()
+
+
+	accession_search= forms.CharField(widget=forms.TextInput(attrs={'class' : 'form-control rounded', 'aria-label' : "accession-number-search",
+	 "aria-describedby" : "basic-addon2",
+	 'placeholder' : 'Patient Accession'}), label=False)
+
+
+
+
+
 
 class remove_patient(forms.Form):
 
 	 patient_rack_location= forms.CharField(widget=forms.HiddenInput())
+
+
+

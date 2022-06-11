@@ -6,13 +6,13 @@
     border:  2px solid white;
     color: white;
 
-}
+}*/
 
-*/
+
 
 body{
 
-    background-color: #ececec;
+    background: url("image/greybackground.jpg");
 }
 
 #specimen-grid {
@@ -24,6 +24,7 @@ body{
 #grid-row { 
 
     margin-top: 30vh;
+
 }
 
 #row-alpha {
@@ -34,7 +35,7 @@ body{
 
 .alpha-top-grid{
 
-    margin-left: 32px;
+    margin-left: 35px;
 }
 
 
@@ -153,3 +154,181 @@ body{
 
 }
 
+
+#nav {
+
+
+  background: rgb(111,162,215);
+  background: linear-gradient(180deg, rgba(111,162,215,1) 0%, rgba(58,93,131,1) 50%, rgba(58,93,131,1) 100%);
+
+}
+
+#navbar-title {
+
+    color: #e3e3e3;
+}
+
+#search-icon {
+
+    color: #c9c9c9;
+}
+
+.modal-header {
+    border-bottom: 0 none;
+}
+
+#basic-addon2 {
+
+color: white;
+background-color: #6C90B7;
+
+}
+
+#batch {
+
+    background-color: #3a5d83;
+    padding-bottom: 11px;
+    font-size: 16px;
+}
+
+#batch_two {
+
+    background-color: #3a5d83;
+    padding-bottom: 11px;
+    font-size: 16px;
+
+}
+
+#batch_three {
+
+    background-color: #3a5d83;
+    padding-bottom: 11px;
+    font-size: 16px;
+}
+
+
+
+#pencil {
+
+    background-color: white;
+    color: #3a5d83;
+    font-size: 20px;
+    padding-right: 4px;
+    padding-left: 3px;
+    border-radius: 5px;
+}
+
+#checkmark {
+
+
+    
+    /*color: #3a5d83;*/
+    font-size: 20px;
+    padding-right: 4px;
+    padding-left: 3px;
+    border-radius: 5px;
+
+}
+
+#archive {
+
+
+    
+   /* background-color: white;*/
+    color: white;
+    font-size: 20px;
+    padding-right: 4px;
+    padding-left: 3px;
+    border-radius: 5px;
+
+}
+
+
+/*#outstanding {
+
+    font-size: 20px;
+    background-color: #ececec;
+}
+*/
+
+#outstanding-column {
+
+
+    
+    margin-left: 0px;
+    overflow:auto;
+    display:block;
+
+
+}
+
+
+
+#car {
+
+    float: left;
+    margin-right: 10px;
+    clear:both;
+    margin-top: 23px;
+}
+
+
+#table-col {
+
+    background-color: white;
+}
+
+#car-col {
+
+    background-color: #ececec;
+}
+
+#car-col-two{
+
+    background-color: #ececec;
+
+}
+
+#car-col-three{
+
+    background-color: #ececec;
+
+}
+
+
+#inside-table {
+
+    background-color: #e4e4e4;
+    height: 50vh;
+    margin-top: -26px;
+    
+
+
+}
+
+#no-rows{
+
+    
+    background-color: red;
+
+
+
+}
+
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 49%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  background: #f1f1f1;
+  border-radius: 18px;
+  padding: 12px;
+}
+
+#storage-manager {
+
+    color: white;
+    text-decoration: none;
+}

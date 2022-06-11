@@ -233,51 +233,108 @@ def hematology_first_rack_one_view(request):
 
 		if 'accessionNumber' in request.POST:
 
+
+
+
 			accession_number= request.POST['accessionNumber']
 			position= request.POST['positionId']
 			lock_switch= request.POST['lock_switch']
-			locked_tubetype= request.POST['locked_tubetype']
 
-			
-			
-			
-			get_position= hematology_first_rack_one.objects.get(position=position)
-
-
-			if len(accession_number) == 6:
-
-				# link_rack= accession_numbers.objects.get(accession_number=accession_number)
-
-				# link_rack.rack_link= hematology_first_rack_one.objects.get(position=position)
-
-				# link_rack.save()
-
-				accession_num= accession_numbers.objects.get(accession_number=accession_number)
-
-				rack= hematology_first_rack_one.objects.get(position=position)
-
-				rack.accession_link= accession_num
-
-				rack.save()
-
-
-			elif len(accession_number) == 2:
-
-
-				#*** This is where you need to save the accesison and link it to the accession table 
-
-				tube_type_dicts= {"31" : "box edta-large", "21" : "box serum-large", "16" : "box pst-large"}
-
-				css_from_user= tube_type_dicts[accession_number]
-
-				get_position.css_of_position= css_from_user
-			
-				get_position.tube_type= accession_number
-
-				get_position.save()
+			# *** IF YOU GET locked_tubetype ISSUES THIS IS PROBABLY WHERE THEY AER COMING FROM ***
+			locked_tubetype= request.POST.get('locked_tubetype',False)
 
 
 		
+						
+			get_position= hematology_first_rack_one.objects.get(position=position)
+
+			css_from_user= ""
+
+			if lock_switch == "true":
+
+				if len(accession_number) == 6:
+
+					
+
+					# link_rack= accession_numbers.objects.get(accession_number=accession_number)
+
+					# link_rack.rack_link= hematology_first_rack_one.objects.get(position=position)
+
+					# link_rack.save()
+
+					accession_num= accession_numbers.objects.get(accession_number=accession_number)
+
+					rack= hematology_first_rack_one.objects.get(position=position)
+
+					rack.accession_link= accession_num
+
+					
+					#*** This is where you need to save the accesison and link it to the accession table 
+
+					tube_type_dicts= {"31" : "box edta-large", "21" : "box serum-large", "16" : "box pst-large", "" : "pass"}
+
+					css_from_user= tube_type_dicts[locked_tubetype]
+
+					rack.css_of_position= css_from_user
+				
+					rack.tube_type= locked_tubetype
+
+					rack.save()
+
+
+				elif len(accession_number) == 2:
+
+
+					rack= hematology_first_rack_one.objects.get(position=position)
+
+					tube_type_dicts= {"31" : "box edta-large", "21" : "box serum-large", "16" : "box pst-large", '' : "pass"}
+
+					css_from_user= tube_type_dicts[locked_tubetype]
+
+					rack.css_of_position= css_from_user
+				
+					rack.tube_type= locked_tubetype
+
+					print(rack.tube_type)
+
+					rack.save()
+
+			if lock_switch == "false":
+
+
+				if len(accession_number) == 6:
+
+					# link_rack= accession_numbers.objects.get(accession_number=accession_number)
+
+					# link_rack.rack_link= hematology_first_rack_one.objects.get(position=position)
+
+					# link_rack.save()
+
+					accession_num= accession_numbers.objects.get(accession_number=accession_number)
+
+					rack= hematology_first_rack_one.objects.get(position=position)
+
+					rack.accession_link= accession_num
+
+					rack.save()
+
+
+				elif len(accession_number) == 2:
+
+
+					#*** This is where you need to save the accesison and link it to the accession table 
+
+					tube_type_dicts= {"31" : "box edta-large", "21" : "box serum-large", "16" : "box pst-large"}
+
+					css_from_user= tube_type_dicts[accession_number]
+
+					get_position.css_of_position= css_from_user
+				
+					get_position.tube_type= accession_number
+
+					get_position.save()
+
+
 
 
 			if request.is_ajax():
