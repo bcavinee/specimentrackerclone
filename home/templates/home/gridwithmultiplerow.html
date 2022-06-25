@@ -28,53 +28,142 @@
 				
 				<p id="rack-storage-manager">STORAGE MANAGER</p>
 
-				<div class="alpha-top-grid" id="user{{user_selected_accession}}"></div>
-
-
 			</div>
 			
 		</div>
 
-				
+			
 		<div class="container" id="storage-container">
 			<div class="row" id="grid-row">
 
+				<div class="col-1" style="max-width: 3%;">
+
+					<div class="row">
+						
+					</div>
+					<div class="row" style="margin-top: 42px;">
+						<h6 class="ms-2">1</h6>
+					</div>
+					<div class="row">
+						<h6 class="ms-2">2</h6>
+					</div>
+
+					<div class="row">
+						<h6 class="ms-2">3</h6>
+					</div>										
+
+					<div class="row">
+						<h6 class="ms-2">4</h6>
+					</div>
+
+					<div class="row">
+						<h6 class="ms-2">5</h6>
+					</div>										
+					<div class="row">
+						<h6 class="ms-2">6</h6>
+					</div>
+
+					<div class="row">
+						<h6 class="ms-2">7</h6>
+					</div>										
+					<div class="row">
+						<h6 class="ms-2">8</h6>
+					</div>
+
+					<div class="row">
+						<h6 class="ms-2">9</h6>
+					</div>										
+					<div class="row">
+						<h6>10</h6>
+					</div>
+
+					<div class="row">
+						<h6>11</h6>
+					</div>
+
+					<div class="row">
+						<h6>12</h6>
+					</div>										
+					<div class="row">
+						<h6>13</h6>
+					</div>
+
+					<div class="row">
+						<h6>14</h6>
+					</div>										
+					<div class="row">
+						<h6>15</h6>
+					</div>
+
+								
+
+								
 
 
+
+					
+				</div>
 				<div class="col" id="specimen-grid">
 
 
+					<div class="rack-rows" style="background-color: white">
+						
+						<div>
+							<h6>A</h6>
+						</div>
 
-					<div class="num_rows" style="background-color: white;">
+						<div class="alpha-top-grid" id="user{{user_selected_accession}}">
+							<h6>B</h6>
+						</div>
 
-						<div class="box number"><h6 class="ms-2"></h6></div>
-						<div class="box number"><h6 class="ms-2">1</h6></div>
-						<div class="box number"><h6 class="ms-2">2</h6></div>
-						<div class="box number"><h6 class="ms-2">3</h6></div>
-						<div class="box number"><h6 class="ms-2">4</h6></div>
-						<div class="box number"><h6 class="ms-2">5</h6></div>
-						<div class="box number"><h6 class="ms-2">6</h6></div>
-						<div class="box number"><h6 class="ms-2">7</h6></div>
-						<div class="box number"><h6 class="ms-2">8</h6></div>
-						<div class="box number"><h6 class="ms-2">9</h6></div>
-						<div class="box number"><h6 class="ms-1">10</h6></div>
-						<div class="box number"><h6 class="ms-1">11</h6></div>
-						<div class="box number"><h6 class="ms-1">12</h6></div>
-						<div class="box number"><h6 class="ms-1">13</h6></div>
-						<div class="box number"><h6 class="ms-1">14</h6></div>
+						<div class="alpha-top-grid">
+							<h6>C</h6>
+						</div>
 
+						<div class="alpha-top-grid">
+							<h6>D</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>E</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6 >F</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>G</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>H</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>I</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>J</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>K</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>L</h6>
+						</div>
 
 					</div>
 
 
-					<div class="rack-rows">
-
-						<div class="box number"><h6 class="ms-2">A</h6></div>
+					
+					<div class="rack-rows" style="border-top-right-radius: 5px;">
 
 						
 						{% for object in hematology_first_rack_one_objects %}
-
-
 									
 							{% if object.position == "a1" %}
 								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
@@ -120,12 +209,7 @@
 								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
 									
-							{% elif object.position == "m1" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "n1" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
 									
 
@@ -138,8 +222,9 @@
 
 
 					<div class="rack-rows">
-						 
-						<div class="box number" id="user{{user_selected_accession}}"><h6 class="ms-2">B</h6></div>
+						
+
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a2" %}
@@ -186,12 +271,7 @@
 								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
 									
-							{% elif object.position == "m2" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "n2" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
 									
 
@@ -203,9 +283,9 @@
 
 
 					<div class="rack-rows" id="row-three">
-						 
+						
 
-						<div class="box number"><h6 class="ms-2">C</h6></div>
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a3" %}
@@ -252,12 +332,7 @@
 								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
 									
-							{% elif object.position == "m3" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "n3" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 													
 
 							{% endif %}
@@ -270,8 +345,9 @@
 
 
 					<div class="rack-rows" id="row-four">
-						 
-						<div class="box number"><h6 class="ms-2">D</h6></div>
+						
+
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a4" %}
@@ -317,13 +393,7 @@
 							{% elif object.position == "l4" %}
 								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "m4" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "n4" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 													
 
 							{% endif %}
@@ -337,8 +407,9 @@
 
 
 					<div class="rack-rows" id="row-five">
-						 
-						<div class="box number"><h6 class="ms-2">E</h6></div>
+						
+
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a5" %}
@@ -384,13 +455,7 @@
 							{% elif object.position == "l5" %}
 								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "m5" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "n5" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 													
 
 							{% endif %}
@@ -406,7 +471,8 @@
 
 					<div class="rack-rows" id="row-six">
 						
-						<div class="box number"><h6 class="ms-2">F</h6></div>
+
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a6" %}
@@ -453,12 +519,7 @@
 								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
 									
-							{% elif object.position == "m6" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "n6" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 													
 
 							{% endif %}
@@ -470,8 +531,8 @@
 
 
 					<div class="rack-rows" id="row-seven">
-						 
-						<div class="box number"><h6 class="ms-2">G</h6></div>
+						
+
 
 						{% for object in hematology_first_rack_one_objects %}
 									
@@ -519,12 +580,6 @@
 								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
 									
-							{% elif object.position == "m7" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
-
-									
-							{% elif object.position == "n7" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 													
 
 							{% endif %}
@@ -535,9 +590,9 @@
 
 
 					<div class="rack-rows" id="row-eight">
-						 
+						
 
-						<div class="box number"><h6 class="ms-2">H</h6></div>
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a8" %}
@@ -584,12 +639,7 @@
 								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
 									
-							{% elif object.position == "m8" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "n8" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 													
 
 							{% endif %}
@@ -605,8 +655,9 @@
 
 
 					<div class="rack-rows" id="row-nine">
-						 
-						<div class="box number"><h6 class="ms-2">I</h6></div>
+						
+
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a9" %}
@@ -653,12 +704,7 @@
 								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
 									
-							{% elif object.position == "m9" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "n9" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 													
 
 							{% endif %}
@@ -672,7 +718,7 @@
 					<div class="rack-rows" id="row-ten">
 						
 
-						<div class="box number"><h6 class="ms-2">J</h6></div>
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a10" %}
@@ -719,12 +765,7 @@
 								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
 									
-							{% elif object.position == "m10" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "n10" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 													
 
 							{% endif %}
@@ -738,7 +779,7 @@
 					<div class="rack-rows" id="row-eleven">
 						
 
-						<div class="box number"><h6 class="ms-2">K</h6></div>
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a11" %}
@@ -784,14 +825,7 @@
 							{% elif object.position == "l11" %}
 								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "m11" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "n11" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
-													
 
 							{% endif %}
 
@@ -806,7 +840,7 @@
 					<div class="rack-rows" id="row-twelve">
 						
 
-						<div class="box number"><h6 class="ms-2">L</h6></div>
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a12" %}
@@ -853,12 +887,7 @@
 								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
 									
-							{% elif object.position == "m12" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "n12" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 													
 
 							{% endif %}
@@ -872,7 +901,7 @@
 					<div class="rack-rows" id="row-thirteen">
 						
 
-						<div class="box number"><h6 class="ms-2">N</h6></div>
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a13" %}
@@ -918,13 +947,7 @@
 							{% elif object.position == "l13" %}
 								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "m13" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "n13" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 													
 
 							{% endif %}
@@ -942,7 +965,7 @@
 
 					<div class="rack-rows" id="row-fourteen">
 						
-						<div class="box number"><h6 class="ms-2">M</h6></div>
+
 
 						{% for object in hematology_first_rack_one_objects %}
 									
@@ -989,13 +1012,7 @@
 							{% elif object.position == "l14" %}
 								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "m14" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "n14" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 													
 
 							{% endif %}
@@ -1009,7 +1026,7 @@
 					<div class="rack-rows" id="row-fifteen">
 						
 
-						<div class="box number"><h6 class="ms-2">Y</h6></div>
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a15" %}
@@ -1055,13 +1072,7 @@
 							{% elif object.position == "l15" %}
 								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "m15" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 
-									
-							{% elif object.position == "n15" %}
-								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
 													
 
 							{% endif %}
@@ -1078,37 +1089,17 @@
 				<div class="col"></div>
 				<div class="col-4">
 					
-					
-											
-
 					<form method="POST" id="accession-form">
+						{% csrf_token %}
 
-						<label for="accession-number" class="form-label fw-bold" >Scan or Type Input</label>
-						<div class="input-group">
-							
-							{% csrf_token %}
-						    
-						    <input type="search" class="form-control" id="accession-number-or-tubetype" placeholder="Scan or Type" style="border-radius: 3px; width: 75%;">
+					    <label for="accession-number" class="form-label">Enter Accession Number Followed By Tubetype</label>
+					    
+					    <input type="search" class="form-control" id="accession-number">
 
-							<button type="button" class="btn btn-success ms-2" id="lock_one"><span id="button-accession">M11111</span></button>
-							<button type="button" class="btn btn-success ms-2" id="lock"><span id="button-accession">M11111</span><img src="media/images/unlocked.png" id="lock-img"class="lock-img ms-1"></button>
-
-
-
-
-						</div>
-
-
+					    <!-- <button class="btn btn-primary" type="submit">Submit</button> -->
 					</form>
-
+					<button type="button" class="btn btn-success mt-3" id="lock"><span id="button-accession">M11111</span><img src="media/images/unlocked.png" id="lock-img"class="lock-img ms-1"></button>
 					<h3 id="lock-error"></h3>
-						
-
-
-
-					<p class="fw-bold mt-2">Current Storage Location <span><i class="bi bi-cursor-fill"></i></span></p>
-
-
 
 
 
@@ -1179,13 +1170,10 @@
 
 				</div>
 
-<!-- 				<div class="col">
-					 
-					<p id="flash-accession"><span class="ms-3 mt-2" id="accession-flash-span"></span></p>
-				</div>
- -->
+
 			</div>
 		</div>
+
 
 
 

@@ -102,7 +102,65 @@ def hematology_first_rack_one_view(request):
 
 	if request.method == "POST":
 
-		
+		# try:
+		# 	if 'patient_rack_location' in request.POST:
+
+		# 		remove_patient_form= remove_patient(request.POST)
+
+
+		# 		from_search= True
+
+		# 		if request.POST['patient_rack_location'] == "" and (from_search == True and accession_search == True):
+
+
+					
+		# 			remove_location= hematology_first_rack_one.objects.get(position=accession_rack_position)
+
+		# 			remove_location.css_of_position= "box blank"
+		# 			remove_location.tube_type= ""
+
+		# 			remove_location.accession_link = None
+
+
+
+		# 			remove_location.save()
+
+		# 			from_search= False
+					
+
+		# 		if remove_patient_form.is_valid():
+
+		# 			location_to_remove= remove_patient_form.cleaned_data['patient_rack_location']
+
+		# 			single_location_removal= hematology_first_rack_one.objects.get(position=location_to_remove)
+
+		# 			single_location_removal.css_of_position= "box blank"
+		# 			single_location_removal.tube_type= ""
+
+		# 			single_location_removal.save()
+
+
+		# 		position_with_accession= hematology_first_rack_one.objects.get(position=location_to_remove)
+
+
+		# 		# if accession_numbers.objects.filter(rack_link=single_location_removal).exists():
+
+		# 		# 	rack_position_accession_link= accession_numbers.objects.get(rack_link=single_location_removal)
+					
+		# 		# 	rack_position_accession_link.rack_link= None
+
+		# 		# 	rack_position_accession_link.save()
+
+		# 		if position_with_accession.accession_link != None:
+
+		# 			position_with_accession.accession_link = None
+
+		# 			position_with_accession.save()
+
+
+		# except UnboundLocalError:
+		# 	print("welp")	
+
 
 
 		if 'removeSinglePatientHidden' in request.POST:
@@ -179,53 +237,142 @@ def hematology_first_rack_one_view(request):
 					accession.save()
 
 
-		
-		if 'positionId' in request.POST:
-
-			
-			
-			accession_and_tubetype= request.POST.getlist('accessionPlusTubeType[]')
-			position= request.POST['positionId']
-
-			
-			
-		
-			#If the user has entered an accession number and tubetype a list will be passed to accession_and_tubetype
-			if len(accession_and_tubetype) == 2:
+		if 'accessionNumber' in request.POST:
 
 
-				#Setting accession and tubetype to two seperate variables
-				accession_number_from_user= accession_and_tubetype[0]
-				tube_type_from_user= accession_and_tubetype[1]
+			#Good starting point for getting amount of spots available
 
+			# pos_avi= hematology_first_rack_one.objects.all()
 
-				#Getting queryset of the accession number the user chose
-				accession_num= accession_numbers.objects.get(accession_number=accession_number_from_user)
+			# positions_avaliable= 0
 
-				#Getting a queryset of the position the user chose
-				rack= hematology_first_rack_one.objects.get(position=position)
-
-				#Setting the rack link to the accession from user
-				rack.accession_link= accession_num
-
+			# for x in pos_avi:
 				
-				tube_type_dicts= {"31" : "box edta-large", "21" : "box serum-large", "16" : "box pst-large"}
+			# 	if x.css_of_position == "box blank":
 
-				#Setting CSS based on the user selected tubetype
-				css_from_user= tube_type_dicts[tube_type_from_user]
+			# 		positions_avaliable += 1
 
-				rack.css_of_position= css_from_user
-			
-				rack.tube_type= tube_type_from_user
+			# print(positions_avaliable)
 
-				rack.save()
+			accession_number= request.POST['accessionNumber']
+			position= request.POST['positionId']
+			lock_switch= request.POST['lock_switch']
+
+			# *** IF YOU GET locked_tubetype ISSUES THIS IS PROBABLY WHERE THEY AER COMING FROM ***
+			locked_tubetype= request.POST.get('locked_tubetype',False)
+
+
+		
+						
+			get_position= hematology_first_rack_one.objects.get(position=position)
+
+			css_from_user= ""
+
+			if lock_switch == "true":
+
+				if len(accession_number) == 6:
+
+					
+
+					# link_rack= accession_numbers.objects.get(accession_number=accession_number)
+
+					# link_rack.rack_link= hematology_first_rack_one.objects.get(position=position)
+
+					# link_rack.save()
+
+					accession_num= accession_numbers.objects.get(accession_number=accession_number)
+
+					rack= hematology_first_rack_one.objects.get(position=position)
+
+					rack.accession_link= accession_num
+
+					
+					#*** This is where you need to save the accesison and link it to the accession table 
+
+					tube_type_dicts= {"31" : "box edta-large", "21" : "box serum-large", "16" : "box pst-large", "" : "pass"}
+
+					css_from_user= tube_type_dicts[locked_tubetype]
+
+					rack.css_of_position= css_from_user
+				
+					rack.tube_type= locked_tubetype
+
+					rack.save()
+
+
+				elif len(accession_number) == 2:
+
+
+					rack= hematology_first_rack_one.objects.get(position=position)
+
+					tube_type_dicts= {"31" : "box edta-large", "21" : "box serum-large", "16" : "box pst-large", '' : "pass"}
+
+					css_from_user= tube_type_dicts[locked_tubetype]
+
+					rack.css_of_position= css_from_user
+				
+					rack.tube_type= locked_tubetype
+
+					print(rack.tube_type)
+
+					rack.save()
+
+			if lock_switch == "false":
+
+
+				if len(accession_number) == 6:
+
+					# link_rack= accession_numbers.objects.get(accession_number=accession_number)
+
+					# link_rack.rack_link= hematology_first_rack_one.objects.get(position=position)
+
+					# link_rack.save()
+
+					accession_num= accession_numbers.objects.get(accession_number=accession_number)
+
+					rack= hematology_first_rack_one.objects.get(position=position)
+
+					rack.accession_link= accession_num
+
+					rack.save()
+
+
+				elif len(accession_number) == 2:
+
+
+					#*** This is where you need to save the accesison and link it to the accession table 
+
+					tube_type_dicts= {"31" : "box edta-large", "21" : "box serum-large", "16" : "box pst-large"}
+
+					css_from_user= tube_type_dicts[accession_number]
+
+					get_position.css_of_position= css_from_user
+				
+					get_position.tube_type= accession_number
+
+					get_position.save()
+
 
 
 
 			if request.is_ajax():
 
 
-				return JsonResponse({'tube_type_from_user' : tube_type_from_user}, status=200)
+				if len(accession_number) == 6:
+
+
+					#*********
+					
+					patient= accession_numbers.objects.get(accession_number= accession_number)
+					patient_name_from_model= patient.patient_link.patient_name
+					patient_mrn= patient.patient_link.medical_record_number
+
+				else:
+				
+					patient_name_from_model= ""	
+					patient_mrn= ""
+
+				return JsonResponse({"accession_number" : accession_number, "patient_name_from_model" : patient_name_from_model, 'patient_mrn' : patient_mrn}, status=200)
 
 
 
@@ -256,7 +403,7 @@ def hematology_first_rack_one_view(request):
 		from_search= hematology_first_rack_one.objects.get(position=accession_rack_position)
 	
 	except hematology_first_rack_one.DoesNotExist:
-		pass
+		print("nope")
 
 
 	try:
@@ -265,7 +412,7 @@ def hematology_first_rack_one_view(request):
 			user_selected_accession= None
 
 	except UnboundLocalError:
-		pass
+		print("nope")
 
 
 	# try:

@@ -172,11 +172,38 @@
 
 				<button type="button" class="btn btn-primary rounded-1 mt-4" id="batch_two"><i class="bi bi-check-circle me-2" id="checkmark"></i>SPECIMEN CHECK-IN</button>
 
-				<button type="button" class="btn btn-primary rounded-1 mt-4" id="batch_three"><i class="bi bi-archive me-2" id="archive"></i><a href="{% url 'hematology_first_rack_one' %}" id="storage-manager">STORAGE MANAGER</a></button>
+				<button type="button" class="btn btn-primary rounded-1 mt-4" id="batch_three" data-bs-toggle="modal" data-bs-target="#rackselectionModal"><i class="bi bi-archive me-2" id="archive"></i>STORAGE MANAGER</button>
 
 			</div>
 		
 		</div>
+
+		<div class="modal fade" id="rackselectionModal" tabindex="-1" aria-labelledby="rackselectionLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="rackselectionLabel">Chose Location</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		      	<form method="POST">
+
+					<div class="input-group mb-3">
+						{% csrf_token %}
+						{{ rack_selection_form|crispy}}
+					</div>
+
+		      		<button class="btn btn-primary" type="submit" id="rack-choice-submit-button" name="user-rack-choice">Go</button>
+		      		
+	      		</form>
+		      </div>
+
+		    </div>
+		  </div>
+		</div>
+
+
+
 
 		<div class="row">
 			

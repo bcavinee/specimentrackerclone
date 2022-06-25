@@ -28,53 +28,80 @@
 				
 				<p id="rack-storage-manager">STORAGE MANAGER</p>
 
-				<div class="alpha-top-grid" id="user{{user_selected_accession}}"></div>
-
-
 			</div>
 			
 		</div>
-
 				
 		<div class="container" id="storage-container">
 			<div class="row" id="grid-row">
+				<div class="col ms-5" id="specimen-grid">
 
+					<div id="row-alpha">
 
+						<div>
+							<h6 style="margin-left: 5px;">A</h6>
+						</div>
 
-				<div class="col" id="specimen-grid">
+						<div class="alpha-top-grid" id="user{{user_selected_accession}}">
+							<h6>B</h6>
+						</div>
 
+						<div class="alpha-top-grid">
+							<h6>C</h6>
+						</div>
 
+						<div class="alpha-top-grid">
+							<h6>D</h6>
+						</div>
 
-					<div class="num_rows" style="background-color: white;">
+						<div class="alpha-top-grid">
+							<h6>E</h6>
+						</div>
 
-						<div class="box number"><h6 class="ms-2"></h6></div>
-						<div class="box number"><h6 class="ms-2">1</h6></div>
-						<div class="box number"><h6 class="ms-2">2</h6></div>
-						<div class="box number"><h6 class="ms-2">3</h6></div>
-						<div class="box number"><h6 class="ms-2">4</h6></div>
-						<div class="box number"><h6 class="ms-2">5</h6></div>
-						<div class="box number"><h6 class="ms-2">6</h6></div>
-						<div class="box number"><h6 class="ms-2">7</h6></div>
-						<div class="box number"><h6 class="ms-2">8</h6></div>
-						<div class="box number"><h6 class="ms-2">9</h6></div>
-						<div class="box number"><h6 class="ms-1">10</h6></div>
-						<div class="box number"><h6 class="ms-1">11</h6></div>
-						<div class="box number"><h6 class="ms-1">12</h6></div>
-						<div class="box number"><h6 class="ms-1">13</h6></div>
-						<div class="box number"><h6 class="ms-1">14</h6></div>
+						<div class="alpha-top-grid">
+							<h6 >F</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>G</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>H</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>I</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>J</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>K</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>L</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>M</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>N</h6>
+						</div>						
+
 
 
 					</div>
 
-
+					
 					<div class="rack-rows">
-
-						<div class="box number"><h6 class="ms-2">A</h6></div>
-
-						
+						<h6 class="rows" id="number-one">1</h6>
 						{% for object in hematology_first_rack_one_objects %}
-
-
 									
 							{% if object.position == "a1" %}
 								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
@@ -138,8 +165,9 @@
 
 
 					<div class="rack-rows">
-						 
-						<div class="box number" id="user{{user_selected_accession}}"><h6 class="ms-2">B</h6></div>
+						<h6 class="rows" id="number-two">2</h6>
+
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a2" %}
@@ -203,9 +231,9 @@
 
 
 					<div class="rack-rows" id="row-three">
-						 
+						<h6 class="rows" id="number-three">3</h6>
 
-						<div class="box number"><h6 class="ms-2">C</h6></div>
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a3" %}
@@ -270,8 +298,9 @@
 
 
 					<div class="rack-rows" id="row-four">
-						 
-						<div class="box number"><h6 class="ms-2">D</h6></div>
+						<h6 class="rows" id="number-four">4</h6>
+
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a4" %}
@@ -337,8 +366,9 @@
 
 
 					<div class="rack-rows" id="row-five">
-						 
-						<div class="box number"><h6 class="ms-2">E</h6></div>
+						<h6 class="rows" id="number-five">5</h6>
+
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a5" %}
@@ -405,8 +435,9 @@
 
 
 					<div class="rack-rows" id="row-six">
-						
-						<div class="box number"><h6 class="ms-2">F</h6></div>
+						<h6 class="rows" id="number-six">6</h6>
+
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a6" %}
@@ -470,8 +501,8 @@
 
 
 					<div class="rack-rows" id="row-seven">
-						 
-						<div class="box number"><h6 class="ms-2">G</h6></div>
+						<h6 class="rows" id="number-seven">7</h6>
+
 
 						{% for object in hematology_first_rack_one_objects %}
 									
@@ -535,9 +566,9 @@
 
 
 					<div class="rack-rows" id="row-eight">
-						 
+						<h6 class="rows" id="number-eight">8</h6>
 
-						<div class="box number"><h6 class="ms-2">H</h6></div>
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a8" %}
@@ -605,8 +636,9 @@
 
 
 					<div class="rack-rows" id="row-nine">
-						 
-						<div class="box number"><h6 class="ms-2">I</h6></div>
+						<h6 class="rows" id="number-nine">9</h6>
+
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a9" %}
@@ -670,9 +702,9 @@
 
 
 					<div class="rack-rows" id="row-ten">
-						
+						<h6 class="rows-two-digits" id="number-ten">10</h6>
 
-						<div class="box number"><h6 class="ms-2">J</h6></div>
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a10" %}
@@ -736,9 +768,9 @@
 
 
 					<div class="rack-rows" id="row-eleven">
-						
+						<h6 class="rows-two-digits" id="number-eleven">11</h6>
 
-						<div class="box number"><h6 class="ms-2">K</h6></div>
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a11" %}
@@ -804,9 +836,9 @@
 
 
 					<div class="rack-rows" id="row-twelve">
-						
+						<h6 class="rows-two-digits" id="number-twelve">12</h6>
 
-						<div class="box number"><h6 class="ms-2">L</h6></div>
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a12" %}
@@ -870,9 +902,9 @@
 
 
 					<div class="rack-rows" id="row-thirteen">
-						
+						<h6 class="rows-two-digits" id="number-thirteen">13</h6>
 
-						<div class="box number"><h6 class="ms-2">N</h6></div>
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a13" %}
@@ -941,8 +973,8 @@
 
 
 					<div class="rack-rows" id="row-fourteen">
-						
-						<div class="box number"><h6 class="ms-2">M</h6></div>
+						<h6 class="rows-two-digits" id="number-fourteen">14</h6>
+
 
 						{% for object in hematology_first_rack_one_objects %}
 									
@@ -1007,9 +1039,9 @@
 
 
 					<div class="rack-rows" id="row-fifteen">
-						
+						<h6 class="rows-two-digits" id="number-fifteen">15</h6>
 
-						<div class="box number"><h6 class="ms-2">Y</h6></div>
+
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a15" %}
@@ -1078,37 +1110,17 @@
 				<div class="col"></div>
 				<div class="col-4">
 					
-					
-											
-
 					<form method="POST" id="accession-form">
+						{% csrf_token %}
 
-						<label for="accession-number" class="form-label fw-bold" >Scan or Type Input</label>
-						<div class="input-group">
-							
-							{% csrf_token %}
-						    
-						    <input type="search" class="form-control" id="accession-number-or-tubetype" placeholder="Scan or Type" style="border-radius: 3px; width: 75%;">
+					    <label for="accession-number" class="form-label">Enter Accession Number Followed By Tubetype</label>
+					    
+					    <input type="search" class="form-control" id="accession-number">
 
-							<button type="button" class="btn btn-success ms-2" id="lock_one"><span id="button-accession">M11111</span></button>
-							<button type="button" class="btn btn-success ms-2" id="lock"><span id="button-accession">M11111</span><img src="media/images/unlocked.png" id="lock-img"class="lock-img ms-1"></button>
-
-
-
-
-						</div>
-
-
+					    <!-- <button class="btn btn-primary" type="submit">Submit</button> -->
 					</form>
-
+					<button type="button" class="btn btn-success mt-3" id="lock"><span id="button-accession">M11111</span><img src="media/images/unlocked.png" id="lock-img"class="lock-img ms-1"></button>
 					<h3 id="lock-error"></h3>
-						
-
-
-
-					<p class="fw-bold mt-2">Current Storage Location <span><i class="bi bi-cursor-fill"></i></span></p>
-
-
 
 
 
@@ -1186,6 +1198,7 @@
  -->
 			</div>
 		</div>
+
 
 
 

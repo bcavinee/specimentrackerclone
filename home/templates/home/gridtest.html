@@ -1,0 +1,446 @@
+{% extends "home/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+
+
+
+
+
+
+	{% block content%}
+
+		<div class="row">
+			
+			<div class="col d-flex justify-content-end">
+				
+				<div class="card text-dark text-center bg-warning mt-3" id="flash-message" style="max-width: 12rem; height: 140px;">
+				  <div class="card-body">
+				    
+				    <p class="card-text">Must enter valid<br>accession number first</p>
+				  </div>
+				</div>			
+
+			</div>
+			
+		</div>
+
+		<div class="container" id="storage-manager-title">
+			
+			<div class="row">
+				
+				<p id="rack-storage-manager">STORAGE MANAGER</p>
+
+			</div>
+			
+		</div>
+				
+		<div class="container" id="storage-container">
+			<div class="row" id="grid-row">
+				<div class="col ms-5" id="specimen-grid">
+
+					<div id="row-alpha">
+
+						<div>
+							<h6 style="margin-left: 0px;">A</h6>
+						</div>
+
+						<div class="alpha-top-grid" id="user{{user_selected_accession}}">
+							<h6>B</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>C</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>D</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>E</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6 >F</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>G</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>H</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>I</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>J</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>K</h6>
+						</div>
+
+						<div class="alpha-top-grid">
+							<h6>L</h6>
+						</div>
+
+				
+
+
+
+					</div>
+				</div>
+				<div class="row">
+					
+					<div class="col-1" style="max-width: 3%;">
+						<h6>1</h6>
+						<h6>2</h6>
+						<h6>3</h6>
+						<h6>4</h6>
+						<h6>5</h6>
+						<h6>6</h6>
+						<h6>7</h6>
+						<h6>8</h6>
+						<h6>9</h6>
+						<h6>10</h6>
+						<h6>11</h6>
+						<h6>12</h6>
+						<h6>13</h6>
+						<h6>14</h6>
+						<h6>15</h6>																				
+					</div>
+
+					<div class="col-4" style="background-color: #e8e5eb;">
+						
+						<div style="display: inline-block;">
+
+
+							{% for object in hematology_first_rack_one_objects %}
+										
+								{% if object.position == "a1" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+										
+								{% elif object.position == "b1" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "c1" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "d1" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "e1" %}
+										<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+
+								{% elif object.position == "f1" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+										
+								{% elif object.position == "g1" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "h1" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "i1" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "j1" %}
+										<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+								{% elif object.position == "k1" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+										
+								{% elif object.position == "l1" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "m1" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "n1" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+
+								{% endif %}
+
+							{% endfor %}
+
+						</div>
+
+						<div style="display: inline-block;">
+
+							{% for object in hematology_first_rack_one_objects %}
+										
+								{% if object.position == "a2" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+										
+								{% elif object.position == "b2" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "c2" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "d2" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "e2" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+
+								{% elif object.position == "f2" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+										
+								{% elif object.position == "g2" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "h2" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "i2" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "j2" %}
+										<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+								{% elif object.position == "k2" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+										
+								{% elif object.position == "l2" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "m2" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "n2" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+
+								{% endif %}
+
+							{% endfor %}
+
+
+						</div>
+
+						<div style="display: inline-block;">
+
+
+							{% for object in hematology_first_rack_one_objects %}
+										
+								{% if object.position == "a3" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+										
+								{% elif object.position == "b3" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "c3" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "d3" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "e3" %}
+										<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+
+								{% elif object.position == "f3" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+										
+								{% elif object.position == "g3" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "h3" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "i3" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "j3" %}
+										<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+								{% elif object.position == "k3" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+										
+								{% elif object.position == "l3" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "m3" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+										
+								{% elif object.position == "n3" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+														
+
+								{% endif %}
+
+							{% endfor %}							
+
+
+						</div>
+
+
+						
+<!-- 
+ 					{% for object in hematology_first_rack_one_objects %}
+									
+							{% if object.position == "a1" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+									
+							{% elif object.position == "b1" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "c1" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "d1" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "e1" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+
+							{% elif object.position == "f1" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+									
+							{% elif object.position == "g1" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "h1" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "i1" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "j1" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+							{% elif object.position == "k1" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+									
+							{% elif object.position == "l1" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "m1" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "n1" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+								
+
+							{% endif %}
+
+						{% endfor %}
+				
+
+				
+						{% for object in hematology_first_rack_one_objects %}
+									
+							{% if object.position == "a2" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+									
+							{% elif object.position == "b2" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "c2" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "d2" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "e2" %}
+									<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+
+							{% elif object.position == "f2" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+									
+							{% elif object.position == "g2" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "h2" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "i2" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "j2" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+							{% elif object.position == "k2" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+									
+							{% elif object.position == "l2" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "m2" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+							{% elif object.position == "n2" %}
+								<div class="{{object.css_of_position}}" id="{{object.position}}"><p class="tubetype">{{object.tube_type}}</p></div>
+
+									
+
+							{% endif %}
+
+						{% endfor %} -->
+										
+
+
+					</div>
+
+				</div>	
+
+			</div>		
+
+		</div>
+
+	{% endblock content %}

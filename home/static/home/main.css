@@ -1,13 +1,21 @@
-/*
-[class*="col"] {
+
+/*[class*="col"] {
 
     padding: 1rem;
-    background-color: teal;
+    background-color: teal !important;
+    border:  2px solid white;
+    color: white;
+
+}
+
+[class*="row"] {
+
+    padding: 1rem;
+    background-color: orange !important;
     border:  2px solid white;
     color: white;
 
 }*/
-
 
 
 body{
@@ -15,57 +23,65 @@ body{
     background: url("image/greybackground.jpg");
 }
 
+
+
+
+
 #specimen-grid {
 
     background-color: white;
     
 }
 
-#grid-row { 
+/*#grid-row { 
 
     margin-top: 30vh;
 
-}
+}*/
 
 #row-alpha {
 
     display: flex;
-    margin-left: 30px;
+    margin-left: 20px;
 }
 
-.alpha-top-grid{
+/*.alpha-top-grid{
 
-    margin-left: 35px;
+  width: 36px;
+  height: 36px;
+  margin-bottom: 0px;
+ 
+  background-color: white;
 }
+*/
 
-
-#row-one{
+.rack-rows{
 
     display:  flex;
+    max-width: 90%;
+
 }
 
-#row-two{
+
+.num_rows {
 
     display:  flex;
+    max-width: 90%;
+
 }
 
-#number-one{
 
-    margin-top: 5px;
-    margin-right: 10px;
-}
+.rows-two-digits{
 
-#number-two{
-
-    margin-top: 6px;
-    margin-right: 7px
-
+    margin-left: -14px;
 }
 
 
 .box {
-  width: 43px;
-  height: 43px;
+
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
   border: 1px solid rgba(0, 0, 0, .2);
   margin-top: 2px;
   margin-left: 2px;
@@ -98,6 +114,20 @@ body{
 
     background: rgb(255,100,100);
     background: linear-gradient(180deg, rgba(255,100,100,1) 0%, rgba(224,8,8,1) 50%, rgba(224,8,8,1) 100%);    
+}
+
+.number {
+
+    background: white;
+    color: black;
+    border: none;
+    
+}
+
+
+h6 {
+
+    font-size: 25px;
 }
 
 .purple {
@@ -332,3 +362,71 @@ background-color: #6C90B7;
     color: white;
     text-decoration: none;
 }
+
+#rack-storage-manager {
+
+    /*background-color: #e8e5eb;*/
+    background-color: #e8e5eb;
+    font-weight: bold;
+   
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;    
+
+}
+
+#storage-container{
+
+    background-color: white;
+    max-width: 65%;
+}
+
+#storage-manager-title{
+
+
+    max-width: 65%;
+    margin-bottom: -0.8%;
+
+   
+}
+
+
+.rows {
+
+    background-color: white;
+
+
+}
+
+.rack-rows {
+
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 6.5%, rgba(232,229,235,1) 11%, rgba(232,229,235,1) 100%);
+}
+
+#storage-manager-title{
+
+
+    max-width: 65%;
+    margin-bottom: -0.8%;
+
+   
+}
+
+
+
+#lock_one {
+
+    visibility: hidden;
+    border-radius: 2px;
+
+}
+
+#lock {
+
+    visibility: hidden;
+    border-radius: 2px;
+
+}
+
+
+
