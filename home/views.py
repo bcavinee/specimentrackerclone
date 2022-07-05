@@ -108,7 +108,7 @@ def hematology_first_rack_one_view(request):
 		if 'removeSinglePatientHidden' in request.POST:
 
 			location_to_remove= request.POST.get("removeSinglePatientHidden")
-
+			print("hi")
 
 			try:
 
@@ -186,12 +186,15 @@ def hematology_first_rack_one_view(request):
 			
 			accession_and_tubetype= request.POST.getlist('accessionPlusTubeType[]')
 			position= request.POST['positionId']
-
+			lock_on_off= request.POST['lockSwitch']
+			# Using request.POST.get('lockedTubeType', False) to provide a default value if a value is not passed in from AJAX
+			locked_tubetype=  request.POST.get('lockedTubeType', False)
 			
-			
+			print(lock_on_off)
+			print(accession_and_tubetype)
 		
 			#If the user has entered an accession number and tubetype a list will be passed to accession_and_tubetype
-			if len(accession_and_tubetype) == 2:
+			if len(accession_and_tubetype) == 2 and lock_on_off == "false":
 
 
 				#Setting accession and tubetype to two seperate variables
@@ -222,14 +225,48 @@ def hematology_first_rack_one_view(request):
 
 
 
-			if request.is_ajax():
+				if request.is_ajax():
 
 
-				return JsonResponse({'tube_type_from_user' : tube_type_from_user}, status=200)
+					return JsonResponse({'tube_type_from_user' : tube_type_from_user}, status=200)
+
+
+			elif len(accession_and_tubetype) == 2 and lock_on_off == "true":
+
+
+				#Setting accession and tubetype to two seperate variables
+				accession_number_from_user= accession_and_tubetype[0]
+				tube_type_from_user= accession_and_tubetype[1]
+
+				
+
+				#Getting queryset of the accession number the user chose
+				accession_num= accession_numbers.objects.get(accession_number=accession_number_from_user)
+
+				#Getting a queryset of the position the user chose
+				rack= hematology_first_rack_one.objects.get(position=position)
+
+				#Setting the rack link to the accession from user
+				rack.accession_link= accession_num
+
+				
+				tube_type_dicts= {"31" : "box edta-large", "21" : "box serum-large", "16" : "box pst-large"}
+
+				#Setting CSS based on the user selected tubetype
+				css_from_user= tube_type_dicts[tube_type_from_user]
+
+				rack.css_of_position= css_from_user
+			
+				rack.tube_type= tube_type_from_user
+
+				rack.save()
 
 
 
+				if request.is_ajax():
 
+
+					return JsonResponse({'tube_type_from_user' : tube_type_from_user}, status=200)
 				
 
 
