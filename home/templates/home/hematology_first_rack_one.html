@@ -11,16 +11,21 @@
 			
 			<div class="col d-flex justify-content-end">
 				
-				<div class="card text-dark text-center bg-warning mt-3" id="flash-message" style="max-width: 12rem; height: 140px;">
+<!-- 				<div class="card text-dark text-center bg-warning mt-3" id="flash-message" style="max-width: 12rem; height: 140px;">
 				  <div class="card-body">
 				    
 				    <p class="card-text">Must enter valid<br>accession number first</p>
 				  </div>
-				</div>			
+				</div>	 -->	
+
+				<div class="alert alert-danger mt-5" id="accession-alert" role="alert" style="visibility: hidden;">
+				  Must Enter Valid Accession Number First
+				</div>					
 
 			</div>
 			
 		</div>
+
 
 		<div class="container" id="storage-manager-title">
 			
@@ -47,21 +52,21 @@
 
 					<div class="num_rows" style="background-color: white;">
 
-						<div class="box number"><h6 class="ms-2"></h6></div>
-						<div class="box number"><h6 class="ms-2">A</h6></div>
-						<div class="box number"><h6 class="ms-2">B</h6></div>
-						<div class="box number"><h6 class="ms-2">C</h6></div>
-						<div class="box number"><h6 class="ms-2">D</h6></div>
-						<div class="box number"><h6 class="ms-2">E</h6></div>
-						<div class="box number"><h6 class="ms-2">F</h6></div>
-						<div class="box number"><h6 class="ms-2">G</h6></div>
-						<div class="box number"><h6 class="ms-2">H</h6></div>
-						<div class="box number"><h6 class="ms-2">I</h6></div>
-						<div class="box number"><h6 class="ms-1">J</h6></div>
-						<div class="box number"><h6 class="ms-1">K</h6></div>
-						<div class="box number"><h6 class="ms-1">L</h6></div>
-						<div class="box number"><h6 class="ms-1">M</h6></div>
-						<div class="box number"><h6 class="ms-1">N</h6></div>
+						<div class="alphanumber"><h6 class="ms-2"></h6></div>
+						<div class="alphanumber"><h6 class="ms-2">A</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">B</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">C</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">D</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">E</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">F</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">G</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">H</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">I</h6></div>
+						<div class="alphanumber"><h6 class="ms-1">J</h6></div>
+						<div class="alphanumber"><h6 class="ms-1">K</h6></div>
+						<div class="alphanumber"><h6 class="ms-1">L</h6></div>
+						<div class="alphanumber"><h6 class="ms-1">M</h6></div>
+						<div class="alphanumber"><h6 class="ms-1">N</h6></div>
 
 
 					</div>
@@ -69,7 +74,7 @@
 
 					<div class="rack-rows">
 
-						<div class="box number"><h6 class="ms-2">1</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">1</h6></div>
 
 						
 						{% for object in hematology_first_rack_one_objects %}
@@ -139,7 +144,7 @@
 
 					<div class="rack-rows">
 						 
-						<div class="box number" id="user{{user_selected_accession}}"><h6 class="ms-2">2</h6></div>
+						<div class="alphanumber" id="user{{user_selected_accession}}"><h6 class="ms-2">2</h6></div>
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a2" %}
@@ -205,7 +210,7 @@
 					<div class="rack-rows" id="row-three">
 						 
 
-						<div class="box number"><h6 class="ms-2">3</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">3</h6></div>
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a3" %}
@@ -271,7 +276,7 @@
 
 					<div class="rack-rows" id="row-four">
 						 
-						<div class="box number"><h6 class="ms-2">4</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">4</h6></div>
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a4" %}
@@ -338,7 +343,7 @@
 
 					<div class="rack-rows" id="row-five">
 						 
-						<div class="box number"><h6 class="ms-2">5</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">5</h6></div>
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a5" %}
@@ -406,7 +411,7 @@
 
 					<div class="rack-rows" id="row-six">
 						
-						<div class="box number"><h6 class="ms-2">6</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">6</h6></div>
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a6" %}
@@ -471,7 +476,7 @@
 
 					<div class="rack-rows" id="row-seven">
 						 
-						<div class="box number"><h6 class="ms-2">7</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">7</h6></div>
 
 						{% for object in hematology_first_rack_one_objects %}
 									
@@ -537,7 +542,7 @@
 					<div class="rack-rows" id="row-eight">
 						 
 
-						<div class="box number"><h6 class="ms-2">8</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">8</h6></div>
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a8" %}
@@ -606,7 +611,7 @@
 
 					<div class="rack-rows" id="row-nine">
 						 
-						<div class="box number"><h6 class="ms-2">9</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">9</h6></div>
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a9" %}
@@ -672,7 +677,7 @@
 					<div class="rack-rows" id="row-ten">
 						
 
-						<div class="box number"><h6 class="ms-2">10</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">10</h6></div>
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a10" %}
@@ -738,7 +743,7 @@
 					<div class="rack-rows" id="row-eleven">
 						
 
-						<div class="box number"><h6 class="ms-2">11</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">11</h6></div>
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a11" %}
@@ -806,7 +811,7 @@
 					<div class="rack-rows" id="row-twelve">
 						
 
-						<div class="box number"><h6 class="ms-2">12</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">12</h6></div>
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a12" %}
@@ -872,7 +877,7 @@
 					<div class="rack-rows" id="row-thirteen">
 						
 
-						<div class="box number"><h6 class="ms-2">13</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">13</h6></div>
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a13" %}
@@ -942,7 +947,7 @@
 
 					<div class="rack-rows" id="row-fourteen">
 						
-						<div class="box number"><h6 class="ms-2">14</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">14</h6></div>
 
 						{% for object in hematology_first_rack_one_objects %}
 									
@@ -1009,7 +1014,7 @@
 					<div class="rack-rows" id="row-fifteen">
 						
 
-						<div class="box number"><h6 class="ms-2">15</h6></div>
+						<div class="alphanumber"><h6 class="ms-2">15</h6></div>
 						{% for object in hematology_first_rack_one_objects %}
 									
 							{% if object.position == "a15" %}
@@ -1081,14 +1086,14 @@
 					
 											
 
-					<form method="POST" id="accession-form">
+					<form method="POST" id="accession-form" style="margin-bottom: -30px;">
 
 						<label for="accession-number" class="form-label fw-bold" >Scan or Type Input</label>
 						<div class="input-group">
 							
 							{% csrf_token %}
 						    
-						    <input type="search" class="form-control" id="accession-number-or-tubetype" placeholder="Scan or Type" style="border-radius: 3px; width: 75%;">
+						    <input type="search" class="form-control" id="accession-number-or-tubetype" placeholder="Scan or Type" style="border-radius: 3px; width: 90%;">
 
 							<button type="button" class="btn btn-success ms-2" id="lock_one"><span id="button-accession">M11111</span></button>
 							<button type="button" class="btn btn-success ms-2" id="lock"><i class="bi bi-unlock-fill me-1" id="unlocked-image"></i><span id="button-tubetype">M11111</span></button>
@@ -1106,51 +1111,49 @@
 
 
 
-					<p class="fw-bold mt-2">Current Storage Location <span><i class="bi bi-cursor-fill"></i></span></p>
+					<p class="fw-bold">Current Storage Location <span><i class="bi bi-cursor-fill"></i></span></p>
 
 
 
 
 
-					<div class="card mt-5">
-					  <div class="card-header">
-					    Patient Information
-					  </div>
-					  <div class="card-body">
-						<table class="table">
-						  
-						  <tbody>
-						    <tr>
-						      
-						      <td scope="col">Medical Record Number</td>
-						      <td scope="col"></td>
-						      <td scope="col" id="medical-record-number"></td>
-						    </tr>						  	
-						    <tr>
-						      
-						      <td>Accession Number</td>
-						      <td></td>
-						      <td id='table-accession-number'></td>
-						    </tr>
-						    <tr>
-						      
-						      <td>Patient Name</td>
-						      <td></td>
-						      <td id="patient-name"></td>
-						    </tr>
 
-						  </tbody>
-						</table>
-					  </div>
-					</div>
+					<table class="table" style="border: 1px solid #ced4da;">
+					  
+					  <tbody>
+					    <tr>
+					      <td>Name:</td>
+					      <td class="fw-bold" style="text-align: right;">Chem 3. Tuesday Second Shift R Rack #2</td>
+
+					    </tr>						  	
+					    <tr>
+					      <td>Code:</td>
+					      <td class="fw-bold" style="text-align: right;">1111</td>	
+					    </tr>
+					    <tr>
+					      <td>Size:</td>
+					      <td style="text-align: right;">12x8, 216 spots, <span class="fw-bold">{{spots_available}} still available</span></td>					      
+					    </tr>
+
+					  </tbody>
+					</table>
 
 
 
 
-					<!-- Button trigger modal -->
-					<button type="button" class="btn btn-primary mt-3" id="delete-button" data-bs-toggle="modal" data-bs-target="#removeAllModal">
-					  Remove All
-					</button>
+					<i class="bi bi-check"></i><span class="fw-light">Saved at 2100</span><span>
+						
+
+						<button class="ms-5" id="change-location">CHANGE LOCATION</button>
+						<button id="delete-button" data-bs-toggle="modal" data-bs-target="#removeAllModal">
+						  DISPOSE ALL
+						</button>						
+
+					</span>
+
+
+
+
 
 					<form method="POST" id="remove-single-patient">
 						
@@ -1176,14 +1179,27 @@
 					  </div>
 					</div>
 				
+					<p class="fw-bold mt-3">Currently Selected Position</p>
+					<table class="table" style="border: 1px solid #ced4da;">
+					  
+					  <tbody>
+					    <tr>
+					      <td>Position</td>
+					      <td class="fw-bold" style="text-align: right;" id="current-position"></td>
+					    </tr>
+					    <tr id="patient-name-row">
+					    </tr>
+					    <tr id="patient-demographics">	
+					    </tr>
+					    <tr id="stored-info">
+					    </tr>						  			    
+					  </tbody>
+					</table>
+
+
 
 				</div>
 
-<!-- 				<div class="col">
-					 
-					<p id="flash-accession"><span class="ms-3 mt-2" id="accession-flash-span"></span></p>
-				</div>
- -->
 			</div>
 		</div>
 

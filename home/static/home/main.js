@@ -23,9 +23,65 @@ lockButtonCSs= {"31" : 'rgba(145,55,230,1)', "21" : "rgba(224,8,8,1)", "16" : "r
 var lockCounter= 0
 var lockOnOff= false
 var lockedTubeType
+var getPositionId
+var demographicTableCounter= 0
+var validTubeTypes= ["21","31","16"]
+var deleteAll= "pass"
 
 $(document).ready(function(){
   $(".box").click(function(){
+
+
+
+    $.ajax({
+
+      url: '',
+      type: 'GET',
+      data: {
+
+        getPositionId: $(this).attr("id")
+
+      },
+
+      success: function(response) {
+
+        // When the user clicks on a position.  We add the following <td> to display patient demographic and storage information
+        // Without the counter I ran into the issue of whenever the user would click a box it would add the following lines to the exisiting
+        // demographic section.  By using a counter we will add the information the first time the user selects a box, then increment the counter.
+        // Since the demographic section is already displayed now, when the counter is >= 1, so the second clicked box.  We then replace the text,
+        // this allows the demographic section to be updated without adding duplicate sections to what already exist 
+
+        if (demographicTableCounter == 0) {
+
+          $(`<tr>
+            <td class="patient-info-headers">Accession Number</td>
+            <td class="fw-bold" style="text-align: right;" id="patient-accession-number">` + response.accession_number + ` 07/11/2022 1500</td></tr>`).insertAfter("#patient-name-row")
+
+          $(`<tr>
+            <td class="patient-info-headers">Patient Name</td>
+            <td class="fw-bold" style="text-align: right;" id="patient-name-mrn">` + response.patient_name + " MRN " + response.mrn + `</td></tr>`).insertAfter("#patient-demographics")
+
+          $(`<tr>
+            <td class="patient-info-headers">Stored</td>
+            <td class="fw-bold" style="text-align: right;" id="patient-storage-information">07/11/2022 BMC</td></tr>`).insertAfter("#stored-info")
+
+          demographicTableCounter ++
+
+        }
+        
+        else if (demographicTableCounter >= 1) {
+
+
+          $("#patient-accession-number").text(response.accession_number +  " 07/11/2022 1500")
+          $("#patient-name-mrn").text(response.patient_name + " MRN " + response.mrn)
+          $("#patient-storage-information").text("07/11/2022 BMC")
+
+
+        }
+
+      }     
+
+    })       
 
 
     // We have to use an if statment here to check if the lockOnOff switch is true or false.
@@ -42,6 +98,7 @@ $(document).ready(function(){
       position= $(this)
       positionText= position.children("p")
       $(this).addClass("pulse")
+
 
 
 
@@ -158,9 +215,29 @@ $(document).ready(function(){
 
 
     
+    // Displaying the position the user has clicked on
+    $("#current-position").text(position.attr("id"))
+
+    if (position.attr("class") == "box blank pulse") {
+
+      $("#current-position").append("(Not in use)")
 
 
+      // If the user clicks on a position that is not in use, we get rid of the currently displayed patient demographic
+      // and storage information
+      $("#patient-accession-number").remove()
+      $("#patient-name-mrn").remove()
+      $("#patient-storage-information").remove()
+      $(".patient-info-headers").remove()
 
+
+      // Setting the demographicTableCounter back to 0.  Since we removed the demographic section in the code above,
+      // setting the counter to 0 will allow us to add new demographic information. 
+      demographicTableCounter= 0
+
+    }
+
+   
 
 
   });
@@ -183,12 +260,19 @@ $(document).on('submit',"#accession-form", function(e) {
     
     // IF the array is empty and the user input an accession number
     // Push that accession to array
-    // Making accession number button visible and adding the accession number to the button
+    // Making accession number button visible and adding the accession number to the button.
     if (accessionPlusTubeType.length == 0 && userAccessionTubeType.length == 6) {
 
        accessionPlusTubeType.push(userAccessionTubeType)
        $("#lock_one").css("visibility","visible")
        $("#lock_one").text(userAccessionTubeType)
+
+       // Hidding alert message when user correctly enters accession number first
+       $("#accession-alert").css("visibility", "hidden")
+
+       // Setting width of accession/tubetype search bar to 55% to allow room
+       // for two buttons.
+       $("#accession-number-or-tubetype").css("max-width","55%")
 
     }
 
@@ -206,13 +290,24 @@ $(document).on('submit',"#accession-form", function(e) {
 
     }
 
+    // We were running into an issue when the user would enter a tubetype while the lock button was on.
+    // This would send two tubetypes to the backend.  By using return if the accessionPlusTubeType array length
+    // is == 1 and if the user input is == 2 and if the lock button is true, we can exit the function early.
+    // By doing this nothing gets sent to the accessionPluseTubeType array.
+    else if ((accessionPlusTubeType.length == 1 && userAccessionTubeType.length == 2) && lockOnOff == true){
+
+      alert("Could it be this easy")
+      return
+    }
 
     // If the user has not entered an accession number and they try to entry a tubetype
     // Display a message to enter an accession first
     else if (accessionPlusTubeType.length == 0 && userAccessionTubeType.length == 2){
 
-      alert("Enter Valid Accession First")
+      $("#accession-alert").css("visibility", "visible")
     }
+
+
 
 
 
@@ -241,7 +336,8 @@ $(document).on('submit',"#accession-form", function(e) {
     // Making tubetype button visible and adding the tubetype number
     // Made an object lockButtonCSs where the key corresponds to the background color of that key
     // Setting the background color of the lock button to the color that corresponds with the tubetype 
-    if (accessionPlusTubeType.length == 1 && userAccessionTubeType.length == 2) {
+    // Added conditional to see if the tubetype the user inputs is in the validTubeTypes array
+    if ((accessionPlusTubeType.length == 1 && userAccessionTubeType.length == 2) && validTubeTypes.includes(userAccessionTubeType) == true) {
 
       $("#lock").css({"visibility" : "visible", "background" : lockButtonCSs[userAccessionTubeType]})
       $("#button-tubetype").text(userAccessionTubeType)
@@ -250,6 +346,14 @@ $(document).on('submit',"#accession-form", function(e) {
       accessionPlusTubeType.push(userAccessionTubeType)
 
     }
+    // Added this else if statement to check if the tubetype the user inputs is in the validTupeTypes array
+    // If they are not we display a message
+    else if ((accessionPlusTubeType.length == 1 && userAccessionTubeType.length == 2) && validTubeTypes.includes(userAccessionTubeType) == false) {
+
+      alert("Bro you did it good job man")
+
+    }
+
 
     else if ((accessionPlusTubeType.length == 1 && userAccessionTubeType.length == 6) && lockOnOff == true) {
 
@@ -268,7 +372,7 @@ $(document).on('submit',"#accession-form", function(e) {
     // Clearing the form input box.
     $("#accession-number-or-tubetype").val("")
     
-    console.log(accessionPlusTubeType)
+  
 
     // If the user has entered two values into the form.  An array with these values will be passed into backend. 
     if (accessionPlusTubeType.length == 2 && lockOnOff == false) {
@@ -361,7 +465,7 @@ $(document).on('submit',"#accession-form", function(e) {
     if (accessionPlusTubeType.length == 2 && lockOnOff == true) {
 
       
-      
+      console.log(accessionPlusTubeType)
 
     $.ajax({
 
@@ -460,7 +564,7 @@ $(document).ready(function(){
 
       url: '',
       type: 'GET',
-      data: {
+      data: {deleteAll : deleteAll
 
         
 

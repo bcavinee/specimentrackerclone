@@ -75,22 +75,22 @@ class chemistry_first_rack_one(models.Model):
 	position= models.CharField(max_length=200, blank=True)
 	css_of_position= models.CharField(max_length=500, blank=True)
 	tube_type= models.CharField(max_length=500, blank=True)
-	accession_number= models.CharField(max_length=10, blank=True)
-	#sorting_purposes= models.IntegerField(default=0)
+	accession_link= models.ForeignKey(accession_numbers, on_delete=models.CASCADE, null=True, blank=True)
+	
 
 	def save(self, *args, **kwargs):
 		
-		if self.accession_number == "":
+		if self.accession_link == None:
 			self.css_of_position= "box blank"
-		super(hematology_first_rack_one,self).save(*args,**kwargs)
+			self.tube_type= ""
+		super(chemistry_first_rack_one,self).save(*args,**kwargs)
 	
 	class Meta:
-		verbose_name= "Hematology First Rack One"
-		verbose_name_plural= "Hematology First Rack One"
+		verbose_name= "Chemistry First Rack One"
+		verbose_name_plural= "Chemistry First Rack One"
 
 
 	def __str__(self):
-		return self.position 		
-
+		return self.position 	
 
 
