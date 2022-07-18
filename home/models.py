@@ -47,6 +47,7 @@ class hematology_first_rack_one(models.Model):
 	position= models.CharField(max_length=200, blank=True)
 	css_of_position= models.CharField(max_length=500, blank=True)
 	tube_type= models.CharField(max_length=500, blank=True)
+	name_of_tubetype= models.CharField(max_length=100, blank=True)
 	accession_link= models.ForeignKey(accession_numbers, on_delete=models.CASCADE, null=True, blank=True)
 	
 
@@ -58,8 +59,8 @@ class hematology_first_rack_one(models.Model):
 		super(hematology_first_rack_one,self).save(*args,**kwargs)
 	
 	class Meta:
-		verbose_name= "Hematology First Rack One"
-		verbose_name_plural= "Hematology First Rack One"
+		verbose_name= "Hematology First Shift R Rack #1"
+		verbose_name_plural= "Hematology First Shift R Rack #1"
 
 
 	def __str__(self):
@@ -86,8 +87,8 @@ class chemistry_first_rack_one(models.Model):
 		super(chemistry_first_rack_one,self).save(*args,**kwargs)
 	
 	class Meta:
-		verbose_name= "Chemistry First Rack One"
-		verbose_name_plural= "Chemistry First Rack One"
+		verbose_name= "Chemistry First Shift R Rack #1"
+		verbose_name_plural= "Chemistry First Shift R Rack #1"
 
 
 	def __str__(self):

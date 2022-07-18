@@ -10,7 +10,6 @@ from django.apps import apps
 def home_page(request):
 
 
-
 	rack_selection_form= rack_options()
 	search_accession_form= search_accession()
 
@@ -22,8 +21,7 @@ def home_page(request):
 			rack_selection_form= rack_options(request.POST)
 
 			if rack_selection_form.is_valid():
-
-				
+	
 				rack_selection= rack_selection_form.cleaned_data['rack_options']
 
 				accession_search= False
@@ -36,7 +34,7 @@ def home_page(request):
 
 				request.session['accession_rack_position']= accession_rack_position_none
 
-				return redirect("hematology_first_rack_one")
+				return redirect("rack_template")
 
 		if 'accession_search' in request.POST:
 
@@ -44,17 +42,23 @@ def home_page(request):
 
 			if search_accession_form.is_valid():
 
-				
 				accession_search_results= search_accession_form.cleaned_data['accession_search']
-
 				
 				patient_accession= accession_numbers.objects.get(accession_number=accession_search_results)
 
-				# patient_name= patient_accession.patient_link.patient_name
+				hematology_first_rack_one_model_list= apps.get_model(app_label="home", model_name= "hematology_first_rack_one")
+				chemistry_first_rack_one_model_list= apps.get_model(app_label="home", model_name= "chemistry_first_rack_one")
 
-				# accession_rack_position= patient_accession.rack_link.position
+				model_list= [hematology_first_rack_one_model_list,chemistry_first_rack_one_model_list]
+				
+				for model in model_list:
 
-				accession_rack= hematology_first_rack_one.objects.filter(accession_link= patient_accession).first()
+					if model.objects.filter(accession_link=patient_accession).exists() == True:
+						
+						model_for_search= model
+						break
+
+				accession_rack= model_for_search.objects.filter(accession_link= patient_accession).first()
 
 				accession_rack_position= accession_rack.position
 
@@ -64,7 +68,7 @@ def home_page(request):
 
 				request.session['accession_rack_position']= accession_rack_position			
 
-				return redirect("hematology_first_rack_one")
+				return redirect("rack_template")
 
 
 
@@ -72,7 +76,7 @@ def home_page(request):
 
 
 
-def hematology_first_rack_one_view(request):
+def rack_view(request):
 
 
 	hematology_first_rack_one_model= apps.get_model(app_label="home", model_name= "hematology_first_rack_one")
@@ -87,11 +91,15 @@ def hematology_first_rack_one_view(request):
 	
 	if rack_selection == 'Hematology First Rack One':
 
-		rack= apps.get_model(app_label="home", model_name= "hematology_first_rack_one")
+		rack_model= apps.get_model(app_label="home", model_name= "hematology_first_rack_one")
 
 	elif rack_selection == 'Chemistry First Rack One':
 
-		rack= apps.get_model(app_label="home", model_name= "chemistry_first_rack_one")
+		rack_model= apps.get_model(app_label="home", model_name= "chemistry_first_rack_one")
+
+
+	rack_name= rack_model._meta.verbose_name
+
 
 	
 	if request.method == "GET":
@@ -104,7 +112,7 @@ def hematology_first_rack_one_view(request):
 
 			try:
 
-				patient_information_link= hematology_first_rack_one.objects.get(position=get_position_id)
+				patient_information_link= rack_model.objects.get(position=get_position_id)
 				accession_number_from_box_rack= patient_information_link.accession_link
 
 				accession_number_from_box= accession_numbers.objects.get(accession_number=accession_number_from_box_rack)
@@ -112,9 +120,10 @@ def hematology_first_rack_one_view(request):
 				accession_number= accession_numbers.objects.values_list('accession_number', flat=True).get(accession_number=accession_number_from_box_rack)	
 				patient_name= accession_number_from_box.patient_link.patient_name
 				mrn= accession_number_from_box.patient_link.medical_record_number
+				tubetypeName= rack_model.objects.values_list('tube_type', flat=True).get(position=get_position_id)	
 
 				
-			except hematology_first_rack_one.DoesNotExist:
+			except rack_model.DoesNotExist:
 
 				pass
 			
@@ -123,7 +132,7 @@ def hematology_first_rack_one_view(request):
 			if request.is_ajax():
 
 
-				return JsonResponse({'accession_number' : accession_number, "patient_name" : patient_name, 'mrn' : mrn})
+				return JsonResponse({'accession_number' : accession_number, "patient_name" : patient_name, 'mrn' : mrn, 'tubetypeName' : tubetypeName})
 
 
 		elif 'deleteAll' in request.GET:
@@ -156,14 +165,14 @@ def hematology_first_rack_one_view(request):
 			try:
 
 			
-				single_location_removal= hematology_first_rack_one.objects.get(position=location_to_remove)
+				single_location_removal= rack_model.objects.get(position=location_to_remove)
 
 				single_location_removal.css_of_position= "box blank"
 				single_location_removal.tube_type= ""
 
 				single_location_removal.save()
 
-				position_with_accession= hematology_first_rack_one.objects.get(position=location_to_remove)
+				position_with_accession= rack_model.objects.get(position=location_to_remove)
 
 				if position_with_accession.accession_link != None:
 
@@ -172,7 +181,7 @@ def hematology_first_rack_one_view(request):
 					position_with_accession.save()
 
 
-			except hematology_first_rack_one.DoesNotExist:
+			except rack_model.DoesNotExist:
 
 				pass
 				
@@ -185,7 +194,7 @@ def hematology_first_rack_one_view(request):
 
 					location_to_remove= "empty"
 
-					remove_location= hematology_first_rack_one.objects.get(position=accession_rack_position)
+					remove_location= rack_model.objects.get(position=accession_rack_position)
 
 					remove_location.css_of_position= "box blank"
 					remove_location.tube_type= ""
@@ -210,14 +219,14 @@ def hematology_first_rack_one_view(request):
 
 			if equation_answer == user_equation_answer:
 
-				for rack_position in hematology_first_rack_one.objects.all():
+				for rack_position in rack_model.objects.all():
 
 					rack_position.css_of_position = "box blank"
 					rack_position.tube_type= ""
 
 					rack_position.save()
 
-				for accession in hematology_first_rack_one.objects.all():
+				for accession in rack_model.objects.all():
 
 					accession.accession_link= None
 
@@ -251,18 +260,21 @@ def hematology_first_rack_one_view(request):
 				accession_num= accession_numbers.objects.get(accession_number=accession_number_from_user)
 
 				#Getting a queryset of the position the user chose
-				rack= hematology_first_rack_one.objects.get(position=position)
+				rack= rack_model.objects.get(position=position)
 
 				#Setting the rack link to the accession from user
 				rack.accession_link= accession_num
 
 				
 				tube_type_dicts= {"31" : "box edta-large", "21" : "box serum-large", "16" : "box pst-large"}
+				tubetype_names= {"31" : 'Lavender EDTA 3 mL', "21" : "Serum 3 mL", "16" : "Plasma Separator Tube 3 mL"}
 
 				#Setting CSS based on the user selected tubetype
 				css_from_user= tube_type_dicts[tube_type_from_user]
+				name_of_tubetype_from_user= tubetype_names[tube_type_from_user]
 
 				rack.css_of_position= css_from_user
+				rack.name_of_tubetype= name_of_tubetype_from_user				
 			
 				rack.tube_type= tube_type_from_user
 
@@ -289,19 +301,22 @@ def hematology_first_rack_one_view(request):
 				accession_num= accession_numbers.objects.get(accession_number=accession_number_from_user)
 
 				#Getting a queryset of the position the user chose
-				rack= hematology_first_rack_one.objects.get(position=position)
+				rack= rack_model.objects.get(position=position)
 
 				#Setting the rack link to the accession from user
 				rack.accession_link= accession_num
 
 				
 				tube_type_dicts= {"31" : "box edta-large", "21" : "box serum-large", "16" : "box pst-large"}
+				tubetype_names= {"31" : 'Lavender EDTA 3 mL', "21" : "Serum 3 mL", "16" : "Plasma Separator Tube 3 mL"}
 
 				#Setting CSS based on the user selected tubetype
 				css_from_user= tube_type_dicts[tube_type_from_user]
+				name_of_tubetype_from_user= tubetype_names[tube_type_from_user]
 
 				rack.css_of_position= css_from_user
-			
+				rack.name_of_tubetype= name_of_tubetype_from_user
+
 				rack.tube_type= tube_type_from_user
 
 				rack.save()
@@ -320,7 +335,7 @@ def hematology_first_rack_one_view(request):
 
 
 
-	hematology_first_rack_one_objects= hematology_first_rack_one.objects.all().order_by("position")
+	rack_objects= rack_model.objects.all().order_by("position")
 
 
 
@@ -359,7 +374,7 @@ def hematology_first_rack_one_view(request):
 	#We then loop through the positions and if the positions css == box blank
 	#we increment the counter.
 	#This gives us our total spots avaliable
-	empty_spot_query= hematology_first_rack_one.objects.all()
+	empty_spot_query= rack_model.objects.all()
 
 	spots_available= 0
 
@@ -371,5 +386,7 @@ def hematology_first_rack_one_view(request):
 
 	
 
-	return render(request,'home/hematology_first_rack_one.html', {'hematology_first_rack_one_objects' : hematology_first_rack_one_objects, 
-		"user_selected_accession" : user_selected_accession, "remove_patient_form" : remove_patient_form, "spots_available" : spots_available})
+
+	return render(request,'home/rack_template.html', {'rack_objects' : rack_objects, 
+		"user_selected_accession" : user_selected_accession, 
+		"remove_patient_form" : remove_patient_form, "spots_available" : spots_available, 'rack_name' : rack_name})

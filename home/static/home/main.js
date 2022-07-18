@@ -1,5 +1,3 @@
-
-
 var position
 var positionText
 var accessionPlusTubeTypeCounter= 0
@@ -10,7 +8,7 @@ var pulsingElement
 var pulseCounter= 0
 var pulseAfterFormEntry= []
 var positionAfterFormEntry
-var lastBoxInRow= ['n1','n2','n3','n4','n5','n6','n7','n8','n9','n10','n11','n12','n13','n14','n15',]
+var lastBoxInRow= ['N1','N2','N3','N4','N5','N6','N7','N8','N9','N10','N11','N12','N13','N14','N15',]
 var getNumberFromAlphaNum
 var numFromAlphaNum
 var nextRowAlphaNum
@@ -19,6 +17,7 @@ var everyClickArray= []
 var x= []
 multipleAccessionCounter= 0
 tubetypeCss= {"31" : 'box edta-large', "21" : "box serum-large", "16" : "box pst-large"}
+tubetypeName= {"31" : 'Lavender EDTA 3 mL', "21" : "Serum 3 mL", "16" : "Plasma Separator Tube 3 mL"}
 lockButtonCSs= {"31" : 'rgba(145,55,230,1)', "21" : "rgba(224,8,8,1)", "16" : "rgba(14,218,13,1)"}
 var lockCounter= 0
 var lockOnOff= false
@@ -27,6 +26,7 @@ var getPositionId
 var demographicTableCounter= 0
 var validTubeTypes= ["21","31","16"]
 var deleteAll= "pass"
+var flashAccessionFromSearch
 
 $(document).ready(function(){
   $(".box").click(function(){
@@ -54,7 +54,7 @@ $(document).ready(function(){
         if (demographicTableCounter == 0) {
 
           $(`<tr>
-            <td class="patient-info-headers">Accession Number</td>
+            <td class="patient-info-headers" style= "white-space: nowrap;">Accession Number</td>
             <td class="fw-bold" style="text-align: right;" id="patient-accession-number">` + response.accession_number + ` 07/11/2022 1500</td></tr>`).insertAfter("#patient-name-row")
 
           $(`<tr>
@@ -64,6 +64,8 @@ $(document).ready(function(){
           $(`<tr>
             <td class="patient-info-headers">Stored</td>
             <td class="fw-bold" style="text-align: right;" id="patient-storage-information">07/11/2022 BMC</td></tr>`).insertAfter("#stored-info")
+
+          
 
           demographicTableCounter ++
 
@@ -75,9 +77,13 @@ $(document).ready(function(){
           $("#patient-accession-number").text(response.accession_number +  " 07/11/2022 1500")
           $("#patient-name-mrn").text(response.patient_name + " MRN " + response.mrn)
           $("#patient-storage-information").text("07/11/2022 BMC")
+        
 
 
         }
+
+        // Passing tubetypeName from backend and prepending to #current-position
+        $("#current-position").prepend(`<span>`+ response.tubetypeName + " " + `</span>`)
 
       }     
 
@@ -409,7 +415,8 @@ $(document).on('submit',"#accession-form", function(e) {
         
         // We stored our css class in an object.  The key is the number that corresponds to a css class
         position.attr("class", tubetypeCss[response.tube_type_from_user])
-        position.text(response.tube_type_from_user)                
+        position.text(response.tube_type_from_user)
+
 
        // We have an array that holds the id of the last box in a row
        // If the box the user selects is not in that array, so any other box beside
@@ -437,7 +444,7 @@ $(document).on('submit',"#accession-form", function(e) {
           
           // We then take that number and prefix the number with an A.
           // This will then give us the position of the next row
-          nextRowAlphaNum= "#" + "a" + numFromAlphaNum.toString()           
+          nextRowAlphaNum= "#" + "A" + numFromAlphaNum.toString()           
  
           // We then set position to the first box in the next row.
           position= $(nextRowAlphaNum)
@@ -528,7 +535,7 @@ $(document).on('submit',"#accession-form", function(e) {
           
           // We then take that number and prefix the number with an A.
           // This will then give us the position of the next row
-          nextRowAlphaNum= "#" + "a" + numFromAlphaNum.toString()           
+          nextRowAlphaNum= "#" + "A" + numFromAlphaNum.toString()           
  
           // We then set position to the first box in the next row.
           position= $(nextRowAlphaNum)
@@ -575,7 +582,7 @@ $(document).ready(function(){
           $('#remove-all-body').html(`
 
 
-            <form method="POST" action="/hematology_first_rack_one" id="remove-all-form">
+            <form method="POST" action="/rack_template" id="remove-all-form">
       
               <input type="hidden" name="delete_equation_answer" id="delete_equation_answer">
               <input type="hidden" name="csrfmiddlewaretoken" value=`+ csrfToken  + `>
@@ -757,3 +764,18 @@ $(document).ready(function(){
 });
 
 
+
+
+$(document).ready(function(){
+
+  // Getting the position of the accession that the number searchs from the class alpha-top-grid.
+  // We have to prepend "user" to the position id due to the fact there would be two ids with the same name
+  // For example if the position A1 is passed the class of alpha-top-grid, it will also show up downstream
+  // in the actual A1 position.  That is why we have to prepend with user.
+  // We then remove user with the replace method.
+  flashAccessionFromSearch= "#" + $(".alpha-top-grid").attr("id").replace('user','')
+  
+  $(flashAccessionFromSearch).addClass("pulse")
+
+
+});
